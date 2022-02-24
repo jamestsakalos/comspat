@@ -264,8 +264,16 @@
         # ASSOCIATUM
         results[["AS"]][q, step] <-
           results[["LD"]][q, step] - results[["CD"]][q, step]
+
+        results[["AS"]][q, step][is.na(results[["AS"]][q, step])] <- 0
+        results[["AS"]][q, step][is.nan(results[["AS"]][q, step])] <- 0
+
         results[["AS_REL"]][q, step] <-
           results[["AS"]][q, step] / results[["CD"]][q, step]
+
+        results[["AS_REL"]][q, step][is.na(results[["AS_REL"]][q, step])] <- 0
+        results[["AS_REL"]][q, step][is.nan(results[["AS_REL"]][q, step])] <- 0
+
       }
     }
   }
@@ -652,7 +660,7 @@
   nsp <- length(unique(data[, "Species"]))
   steps <- nrow(params)
 
-  if (is.null(measures) == TRUE) measures <- c("CD", "NRC", "AS")
+  if (is.null(measures) == TRUE) measures <- c("CD", "NRC")
 
   # Create some empty matrices to fill with the new parameters
   cd_rand <- matrix(0, nsp, steps)
@@ -774,7 +782,7 @@ comspat <- function(data = NULL, params = NULL, dim_max = NULL, type = NULL,
                     measures = NULL, randomization_type = NULL,
                     iterations = 999, alpha = NULL) {
 
-  if (is.null(measures) == TRUE) measures <- c("CD", "NRC", "AS")
+  if (is.null(measures) == TRUE) measures <- c("CD", "NRC")
   if (!is.null(randomization_type) &
       sum(!is.na(match(randomization_type, c("CSR", "RS")))) < 1) {
     stop("randomization_type must be CSR or RS")
