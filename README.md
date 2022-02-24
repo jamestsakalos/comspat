@@ -39,10 +39,7 @@ always welcome.
 
 ## News
 
--   July-2021: Version 0.1 is available from GitHub.
--   November-2021: Version 1.0 reflecting anonymous peer review
-    comments: improved CI workflow, increased number and coverage of
-    internal test and standard code checking with lintr.
+-   February-2022: Version 1.0
 
 <div style="display: flex;">
 
