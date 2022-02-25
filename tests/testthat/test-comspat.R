@@ -37,7 +37,8 @@ test_that("comspat, parallel processing, grid", {
   data("param_grid")
 
   temp <- comspat(s9, param_grid[c(1:2), ], 3, "Grid",
-                  randomization_type = "RS", iterations = 4, alpha = 0.05)
+                  randomization_type = "RS", iterations = 4, alpha = 0.05,
+                  measures = c("CD", "NRC", "AS"))
 
   object <- names(temp)
   expect_equal(object, c("Raw data", "Summary statistics"))

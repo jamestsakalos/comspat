@@ -39,7 +39,8 @@ test_that(".comspat_orig, grids NRC, CD, AS, AS_REL match proofs", {
   data("grid_patchy_associated")
   data("param_grid")
   temp <- .comspat_orig(grid_patchy_associated, param_grid[1:10, ],
-                        dim_max = 64, type = "Grid")
+                        dim_max = 64, type = "Grid",
+                        measures = c("NRC", "CD", "AS"))
 
   # NRC TEST
   expect_type(temp, "list")
@@ -86,7 +87,8 @@ test_that(".comspat_orig, transects NRC, CD, AS, AS_rel match proofs", {
   data("param_tran")
 
   temp <- .comspat_orig(data = tran_grass_t, params = param_tran[1:10, ],
-                        dim_max = 500, type = "Transect")
+                        dim_max = 500, type = "Transect",
+                        measures = c("NRC", "CD", "AS"))
 
   # NRC TEST
   expect_type(temp, "list")

@@ -8,7 +8,8 @@ test_that("comspat_plot, grid matches expectation", {
   data("param_grid")
 
   temp <- .comspat_orig(grid_patchy_associated, param_grid[1:3, ],
-                        dim_max = 64, type = "Grid")
+                        dim_max = 64, type = "Grid",
+                        measures = c("NRC", "CD", "AS"))
 
   p <- comspat_plot(data = list(temp), params = param_grid[1:3, ],
                     type = "Grid", measure = "CD", su_size = 0.01,
@@ -42,7 +43,8 @@ test_that("comspat_plot, transect matches expectation", {
   data("param_tran")
 
   temp <- .comspat_orig(data = tran_grass_t, params = param_tran[1:3, ],
-                        dim_max = 500, type = "Transect")
+                        dim_max = 500, type = "Transect",
+                        measures = c("NRC", "CD", "AS"))
 
   q <- comspat_plot(data = list(temp), params = param_tran[1:3, ],
                     type = "Transect", measure = "NRC", su_size = 0.01,
@@ -79,7 +81,8 @@ test_that("comspat_plot, transect matches expectation, ci", {
   data("param_grid")
 
   temp <- comspat(s9, param_grid[c(1:2), ], 3, "Grid",
-                  randomization_type = "CSR", iterations = 4)
+                  randomization_type = "CSR", iterations = 4,
+                  measures = c("NRC", "CD", "AS"))
 
   q <- comspat_plot(data = list("CSR" = temp[[2]]), params = param_grid[1:2, ],
                     type = "Grid", measure = "NRC", su_size = 0.01,
