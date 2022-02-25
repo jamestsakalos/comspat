@@ -36,7 +36,7 @@
                              measure = NULL, su_size = NULL,
                              ymin = NULL, ymax = NULL, xmin = 0.01, xmax = 10,
                              p_col = "black", p_cex = 0.75, cex_axis = 1,
-                             xaxt = TRUE, yaxt = TRUE) {
+                             xaxt = TRUE, yaxt = TRUE, ci_type = NULL) {
 
   # This is a helper function to produce a plot with confidence intervals
   # the function accepts a named list from the statistical outputs.
@@ -47,14 +47,14 @@
 
   # determine las argument
   switch(measure,
-          "AS" = {
-            as_las <- 0
-          },
-          "AS_REL" = {
-            as_las <- 0
-          }, {
-            as_las <- 2
-          }
+         "AS" = {
+           as_las <- 0
+         },
+         "AS_REL" = {
+           as_las <- 0
+         }, {
+           as_las <- 2
+         }
   )
 
   # get the x-values
@@ -77,8 +77,16 @@
     temp_ul <- data[[i]][[measure]][11, ]
     temp_ll <- data[[i]][[measure]][12, ]
 
-    lines(temp_ul ~ temp_2, col = p_col[[which(names(data) == i)]])
-    lines(temp_ll ~ temp_2, col = p_col[[which(names(data) == i)]])
+    if (ci_type == 'l'){
+      lines(temp_ul ~ temp_2, col = p_col[[which(names(data) == i)]])
+      lines(temp_ll ~ temp_2, col = p_col[[which(names(data) == i)]])
+    }
+
+    if (ci_type == 'py'){
+      polygon(c(temp_ul,rev(temp_ll)) ~ c(temp_2,rev(temp_2)),
+              col = adjustcolor(p_col[[which(names(data) == i)]],
+                                alpha.f=0.5), border = NA)
+    }
 
   }
 
@@ -136,6 +144,7 @@
 ##' @param xaxt TRUE or FALSE. Controls if x-axis text is displayed.
 ##' @param yaxt TRUE or FALSE. Controls if y-axis text is displayed.
 ##' @param stats_output TRUE or FALSE. Controls if confidence intervals display.
+##' @param ci_type l or py. Confidence interval as line or polygon.
 ##' @author James L. Tsakalos
 ##' @seealso \code{\link{comspat}}, \code{\link{data}}
 ##' @examples
@@ -159,12 +168,15 @@ comspat_plot <- function(data = NULL, params = NULL, type = NULL,
                          measure = NULL, su_size = NULL,
                          ymin = NULL, ymax = NULL, xmin = 0.01, xmax = 100,
                          p_col = "black", p_cex = 0.75, cex_axis = 1,
-                         xaxt = NULL, yaxt = NULL, stats_output = FALSE) {
+                         xaxt = TRUE, yaxt = TRUE,
+                         stats_output = FALSE, ci_type = NULL) {
 
   output <- .plot_data_check(data, params, type,
-                               measure, su_size,
-                               ymin, ymax, xmin, xmax,
-                               p_col, p_cex, cex_axis)
+                             measure, su_size,
+                             ymin, ymax, xmin, xmax,
+                             p_col, p_cex, cex_axis)
+
+  if(stats_output == FALSE & is.null(ci_type)){ci_type = 'l'}
 
   data <- output[[1]]
   params <- output[[2]]
@@ -237,7 +249,7 @@ comspat_plot <- function(data = NULL, params = NULL, type = NULL,
 
     .comspat_plot_ci(data, params, type, measure, su_size,
                      ymin, ymax, xmin, xmax, p_col, p_cex, cex_axis,
-                                 xaxt, yaxt)
+                     xaxt, yaxt, ci_type = 'l')
   }
 
 }
