@@ -17,9 +17,10 @@ comspat_plot(
   p_col = "black",
   p_cex = 0.75,
   cex_axis = 1,
-  xaxt = NULL,
-  yaxt = NULL,
-  stats_output = FALSE
+  xaxt = TRUE,
+  yaxt = TRUE,
+  stats_output = FALSE,
+  ci_type = NULL
 )
 }
 \arguments{
@@ -53,6 +54,8 @@ comspat_plot(
 \item{yaxt}{TRUE or FALSE. Controls if y-axis text is displayed.}
 
 \item{stats_output}{TRUE or FALSE. Controls if confidence intervals display.}
+
+\item{ci_type}{l or py. Confidence interval as line or polygon.}
 }
 \description{
 Function \code{comspat_plot} makes use of core R graphics systems to
