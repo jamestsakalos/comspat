@@ -3,9 +3,31 @@ Type: Package
 Title: comspat: An R package to analyze within-community spatial organization
         using species combinations
 Version: 1.0
-Author: James L. Tsakalos, Stefano Chelli, Giandiego Campetella, 
-        Roberto Canullo, Enrico Simonetti and Sandor Bartha
-Maintainer: James L. Tsakalos <jamestsakalos@gmail.com>
+Authors@R: 
+    c(person(given = "James L.",
+             family = "Tsakalos",
+             role = c("aut", "cre", "cph"),
+             email = "cboettig@gmail.com",
+             comment = c(ORCID = "0000-0001-5067-196X")),
+      person(given = "Stefano",
+             family = "Chelli",
+             role = "rev",
+             comment = c(ORCID = "0000-0001-7184-8242")),
+      person(given = "Giandiego",
+             family = "Campetella",
+             role = "rev",
+             comment = c(ORCID = "0000-0001-6126-522X")),
+      person(given = "Roberto",
+             family = "Canullo",
+             role = c("rev", "fnd"),
+             comment = c(ORCID = "0000-0002-9913-6981")),
+      person(given = "Enrico",
+             family = "Simonetti",
+             role = c("rev", "ctb")),
+      person(given = "Sanyi",
+             family = "Bartha",
+             role = "rev",
+             comment=c(ORCID = "0000-0001-6331-7521")))
 Description: Contains functions useful for analysing
         the spatial patterns of species combinations. The related measures are 
         from the Information Theory model family of Pál Juhász-Nagy. 
