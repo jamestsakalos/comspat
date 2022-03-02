@@ -2,7 +2,7 @@ Package: comspat
 Type: Package
 Title: comspat: An R package to analyze within-community spatial organization
         using species combinations
-Version: 1.0
+Version: 1.0.0
 Authors@R: 
     c(person(given = "James L.",
              family = "Tsakalos",
