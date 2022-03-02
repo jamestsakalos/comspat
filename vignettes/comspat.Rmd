@@ -1,14 +1,16 @@
 ---
 title: "Guidelines for the *comspat* package"
 author: "James Tsakalos (james.tsakalos@gmail.com), Stefano Chelli, Giandiego Campetella, Roberto Canullo, Enrico Simonetti, Sandor Bartha"
-date: "23.11.2021"
+date: "02.03.2022"
 output:
   rmarkdown::html_vignette:
     toc: true
 vignette: >
   %\VignetteIndexEntry{comspat}
-  %\VignetteEngine{rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{=html}
@@ -304,7 +306,7 @@ While a picture paints a thousand words, perhaps an animation of the secondary s
 The `'comspat'` function allows users to calculate Information Theory models with and without null models. Analysis without the use of null models is a useful feature during the data exploration phase. It is useful because it allows users to optimize their parameter data set and to visually assess the data without the requirement of parallel computing (initiated when null models are generated) and waiting for potentially time-intensive calculations to complete. Here we demonstrate how the `'comspat_plot'` function can be used to prepare a graphical output. Because the plotting function was created using R's base plotting code it is compatible with several common plotting functions (including `'par'`).
 
 ```{r, echo=FALSE}
-load("ms_results.rdata")
+load("vignettes/ms_results.rdata")
 ```
 
 ```{r, eval=FALSE, echo=TRUE, fig.width = 7.1, fig.cap="**Fig. S12**. Number of realized combinatons and compositional diversity of the three simulated grid data sets. Red, blue and green represent the grid.random, grid.patchy.n.ISC and grid.patchy.associated data sets."}
@@ -318,7 +320,7 @@ g_pa <- comspat(grid_patchy_associated, param_grid, 64, "Grid")
 # Usage of comspat_plot
 # Lets visualize CD for all grid data sets on one plot.
 data <- list(g_r, g_pr, g_pa)
-p_col <- list("red","blue","green")
+p_col <- list("red", "blue", "green")
 par(mar = c(3.5, 3, 0.5, 0.5), mfrow = c(1, 2))
 
 # Let us start by adding the Compositional Diversity (i.e. CD)
@@ -335,17 +337,18 @@ comspat_plot(data = data, params = param_grid, type = "Grid", measure = "NRC",
 ```{r, eval=TRUE, echo=FALSE, fig.width = 7.1, fig.cap="**Fig. S11**. Number of realised combinatons and compositional diversity of the three simulated grid data sets. Red, blue and green represent the grid_random, grid_patchy_n_isc and grid_patchy_associated data sets."}
 
 # Calculate the NRC and CD for the grid data sets.
-#g_r <- comspat(data = grid.random, params = param.grid,
-#             dim_max = 64,type = "Grid")
-#g_pr <- comspat(data = grid.patchy.n.ISC, params = param.grid,
-#              dim_max = 64,type = "Grid")
-#g_pa <- comspat(data = grid.patchy.associated, params = param.grid,
-#              dim_max = 64, type = "Grid")
+#g_r <- comspat(data = grid_random, params = param_grid,
+#               dim_max = 64,type = "Grid")
+#g_pr <- comspat(data = grid_patchy_n_isc, params = param_grid,
+#                dim_max = 64,type = "Grid")
+#g_pa <- comspat(data = grid_patchy_associated, params = param_grid,
+#                dim_max = 64, type = "Grid")
+
 
 # Usage of comspat_plot
 # Lets visualize CD for all grid data sets on one plot.
 data <- list(g_r, g_pr, g_pa)
-p_col <- list("red","blue","green")
+p_col <- list("red", "blue", "green")
 par(mar = c(3.5, 3, 0.5, 0.5), mfrow = c(1, 2))
 
 # Let us start by adding the Compositional Diversity (i.e. CD)
@@ -602,7 +605,7 @@ text(x = 3, y = 62, "C", font = 2, cex = 1)
 
 # Part 2: the NRC plots with 95% CI
 
-p_col = list("blue","red")
+p_col = list("blue", "red")
 
 # Plot the mixed random data frame
 data <- list("CSR" = assoc_csr[[2]], "RS" = assoc_rs[[2]])

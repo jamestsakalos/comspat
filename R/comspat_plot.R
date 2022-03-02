@@ -192,7 +192,7 @@ comspat_plot <- function(data = NULL, params = NULL, type = NULL,
   cex_axis <- output[[12]]
 
   if (isFALSE(stats_output)) {
-    for (i in 1:seq(data)) {
+    for (i in seq(data)) {
 
       temp_1 <- apply(data[[i]][[measure]], 2, max)
       temp_2 <- params[["Length.of.plots"]] ^ 2 * su_size
