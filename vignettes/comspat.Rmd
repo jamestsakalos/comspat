@@ -1,16 +1,14 @@
 ---
 title: "Guidelines for the *comspat* package"
 author: "James Tsakalos (james.tsakalos@gmail.com), Stefano Chelli, Giandiego Campetella, Roberto Canullo, Enrico Simonetti, Sandor Bartha"
-date: "02.03.2022"
+date: "04.03.2022"
 output:
   rmarkdown::html_vignette:
     toc: true
 vignette: >
   %\VignetteIndexEntry{comspat}
-  %\VignetteEncoding{UTF-8}
   %\VignetteEngine{knitr::rmarkdown}
-editor_options: 
-  chunk_output_type: console
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{=html}
@@ -60,13 +58,19 @@ We provide two transects with real data sampled in open sand grassland in Hungar
 
 **Table 1.** Properties of the randomized grid and real transect data sets included within the package. The table shows the name, the sampling type, dimensions (Dim), number of species (NSP), simulated drivers of the spatial patterns and the source of the data sets provided by the package.
 
++---------------------------+----------+---------+-----+-------------------------------------------------------------------------------------------------------------------------------+--------------------------------------+
 | Data set name             | Type     | Dim     | NSP | Type of patterns                                                                                                              | Reference                            |
-|:--------------------------|:---------|:--------|:----|:------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------|
++:==========================+:=========+:========+:====+:==============================================================================================================================+:=====================================+
 | grid_patchy_associated    | Grid     | 64 ⨯ 64 | 6   | interspecific and intraspecific spatial dependence due to simulated abiotic and biotic interactions                           | Czárán (1993) & Bartha et al. (1998) |
++---------------------------+----------+---------+-----+-------------------------------------------------------------------------------------------------------------------------------+--------------------------------------+
 | grid_patchy\_[n_isc]{.ul} | Grid     | 64 ⨯ 64 | 6   | only intraspecific spatial dependence after removing interspecific relationships from the original patterns by randomizations | Bartha & Kertész (1998)              |
++---------------------------+----------+---------+-----+-------------------------------------------------------------------------------------------------------------------------------+--------------------------------------+
 | grid_random               | Grid     | 64 ⨯ 64 | 6   | random distributions after removing both intra- and interspecific relationships by randomizing the original patterns          | Bartha & Kertész (1998)              |
++---------------------------+----------+---------+-----+-------------------------------------------------------------------------------------------------------------------------------+--------------------------------------+
 | tran_grass_s              | Transect | 500 ⨯1  | 10  | --                                                                                                                            | Bartha et al. (2008)                 |
++---------------------------+----------+---------+-----+-------------------------------------------------------------------------------------------------------------------------------+--------------------------------------+
 | tran_grass_t              | Transect | 500 ⨯1  | 6   | --                                                                                                                            | Bartha et al. (2008)                 |
++---------------------------+----------+---------+-----+-------------------------------------------------------------------------------------------------------------------------------+--------------------------------------+
 
 ```{r, fig.width = 7.1, fig.cap="**Fig. S2**. Spatial distribution of the patchy associated, patchy no interspecific association and completely random (i.e. the grid patchy_associated, grid_patchy_n_isc and grid_mixed_random, resp.) data sets."}
 # View the species spatial distributions
@@ -299,12 +303,11 @@ While a picture paints a thousand words, perhaps an animation of the secondary s
 The `'comspat'` function allows users to calculate Information Theory models with and without null models. Analysis without the use of null models is a useful feature during the data exploration phase. It is useful because it allows users to optimize their parameter data set and to visually assess the data without the requirement of parallel computing (initiated when null models are generated) and waiting for potentially time-intensive calculations to complete. Here we demonstrate how the `'comspat_plot'` function can be used to prepare a graphical output. Because the plotting function was created using R's base plotting code it is compatible with several common plotting functions (including `'par'`).
 
 ```{r, echo=FALSE}
-load("vignettes/ms_results.rdata")
+load("ms_results.rdata")
 ```
 
 ```{r, eval=FALSE, echo=TRUE, fig.width = 7.1, fig.cap="**Fig. S12**. Number of realized combinatons and compositional diversity of the three simulated grid data sets. Red, blue and green represent the grid.random, grid.patchy.n.ISC and grid.patchy.associated data sets."}
 # Calculate the NRC and CD for the grid data sets.
-
 g_r <- comspat(data = grid_random, params = param_grid,
                dim_max = 64, type = "Grid")
 g_pr <- comspat(grid_patchy_n_isc, param_grid, 64, "Grid")
@@ -411,6 +414,8 @@ colA <- sample(
   c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02"),6)
 par(mfrow = c(3, 3), mar = c(0, 0, 0, 0), oma = c(5, 5, 0.5, 0.5),
     mgp = c(2, 1, 0), tcl = -0.5)
+
+################################################################################
 
 # Part 1: the spatial distribution
 
@@ -555,6 +560,8 @@ colA <- sample(
   c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02"),6)
 par(mfrow = c(3, 3), mar = c(0, 0, 0, 0), oma = c(5, 5, 0.5, 0.5),
     mgp = c(2, 1, 0), tcl = -0.5)
+
+################################################################################
 
 # Part 1: the spatial distribution
 
@@ -707,20 +714,33 @@ knitr::kable(assoc_csr$`Summary statistics`[["CD"]][,1:10],format = "html", tabl
 
 **Table 2.** Summary statistic variables and descriptions exported by comspat when the randomization argument is specified.
 
++------------+----------------------------------------------------------------------------------------------------------------------------------+
 | Variable   | Description                                                                                                                      |
-|------------|----------------------------------------------------------------------------------------------------------------------------------|
++============+==================================================================================================================================+
 | Original   | Observed results prior to randomization.                                                                                         |
++------------+----------------------------------------------------------------------------------------------------------------------------------+
 | Mean       | Mean of all randomized values                                                                                                    |
++------------+----------------------------------------------------------------------------------------------------------------------------------+
 | Max        | Maximum of all randomized values                                                                                                 |
++------------+----------------------------------------------------------------------------------------------------------------------------------+
 | Min        | Minimum of all randomized values                                                                                                 |
++------------+----------------------------------------------------------------------------------------------------------------------------------+
 | Quartile 1 | 25^th^ percentile, indicating that 25% of the data are less than or equal to this value                                          |
++------------+----------------------------------------------------------------------------------------------------------------------------------+
 | Quartile 3 | 75^th^ percentile indicating that 75% of the data are less than or equal to this value                                           |
++------------+----------------------------------------------------------------------------------------------------------------------------------+
 | std        | Standard deviation is a measure of the amount of variation or dispersion of a set of values (defined by the number of iterations |
++------------+----------------------------------------------------------------------------------------------------------------------------------+
 | cv         | Coefficient of variation (CV) is a measure of relative variability. It is the ratio of the standard deviation to the mean        |
++------------+----------------------------------------------------------------------------------------------------------------------------------+
 | p o\<r     | Number of occurrences where the observed value was less than the reference divided by the number of iterations                   |
++------------+----------------------------------------------------------------------------------------------------------------------------------+
 | p o\>r     | Number of occurrences where the observed value was greater than the reference divided by the number of iterations                |
++------------+----------------------------------------------------------------------------------------------------------------------------------+
 | 95% UL     | Upper limit of the 95% confidence interval                                                                                       |
++------------+----------------------------------------------------------------------------------------------------------------------------------+
 | 95% LL     | Lower limit of the 95% confidence interval                                                                                       |
++------------+----------------------------------------------------------------------------------------------------------------------------------+
 
 ### Case Study 2: Real transect data
 
@@ -750,6 +770,8 @@ par(mfrow = c(2, 2), mar = c(0.5, 2.2, 0, 0), oma = c(7, 3, 0.5, 0.5),
     mgp = c(2, 1, 0), tcl = -0.5)
 
 p_col = list("blue","red")
+
+################################################################################
 
 # Part 1: the NRC plots with 95% CI
 
