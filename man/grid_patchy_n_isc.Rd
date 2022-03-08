@@ -17,7 +17,7 @@ grid_patchy_n_isc
 }
 \description{
 The package contains three grid data sets. The grid data sets
-(64 × 64 sampling units) feature one simulation (grid_patchy_associated)
+(64 搼㸷 64 sampling units) feature one simulation (grid_patchy_associated)
 and two simulation derivatives (grid_random and grid_n_ISC) have been
 produced by randomization. A spatially explicit individual-based simulation
 model (PATPRO) was selected to produce a realistic grid community pattern

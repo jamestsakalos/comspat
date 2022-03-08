@@ -755,6 +755,7 @@
 ##' species as rows and the steps of scaling as columns.
 ##' @author James L. Tsakalos
 ##' @seealso \code{\link{comspat_plot}}
+##' @encoding Latin-1
 ##' @references Juhász-Nagy, P. (1967). On some 'characteristic area' of plant
 ##' community stands. Proc. Colloq. Inf. Theor. 269-282.
 ##'
@@ -763,17 +764,18 @@
 ##' Hung. 22: 61-78.
 ##'
 ##' Juhász-Nagy, P. (1984a). Notes on diversity. Part, I. Introduction. Abstr.
-##' Bot. 8: 43-55.
+##' Bot. 8: 43-55. \&#225
 ##'
 ##' Juhász-Nagy, P. (1984b). Spatial dependence of plant populations. Part 2. A
 ##' family of new models. Acta Bot. Acad Sci. Hung. 30: 363-402.
 ##'
-##' Tsakalos, J.L. et al. (XXXX). comspat: An R package to analyze
-##' within-community spatial association. XXXX.
+##' Tsakalos, J.L. et al. (2022). comspat: An R package to analyze
+##' within-community spatial organization using species combinations. Ecography.
+##' doi: 10.1111/ecog.06216.
 ##' @examples
 ##'
 ##' data("grid_random") #input data frame
-##' data("param_grid") #input paramater data frame
+##' data("param_grid") #input parameter data frame
 ##' temp <- comspat(data = grid_random, params = param_grid[1:5, ],
 ##'  dim_max = 64, type = "Grid")
 ##' @export
