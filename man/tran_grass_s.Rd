@@ -17,7 +17,7 @@ tran_grass_s
 \description{
 The package contains two transects with real data sampled in open
 sand grassland in Hungary (Bartha et al. 2008). These real transect data
-sets were from Bartha et al.’s (2008) long-term study on the effect
+sets were from Bartha et al.'s (2008) long-term study on the effect
 of climate change on the interannual variability of grassland communities.
 The transect data sets represent: (1) the spatial pattern data of frequent
 species (species with more than 25 presences along the transect)
@@ -41,5 +41,10 @@ str(tran_grass_s)
 barplot(table(tran_grass_s$Species),ylab = "Count (no.)",
 space=0.5);box()
 
+}
+\references{
+Bartha, S. (2008). Will interannual variability in sand
+ grassland communities increase with climate change?. Community Ecol.,
+  9: 13–21.
 }
 \keyword{datasets}
