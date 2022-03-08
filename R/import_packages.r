@@ -2,5 +2,5 @@
 #' @importFrom grDevices adjustcolor
 #' @importFrom stats aggregate na.omit sd
 #' @importFrom vdiffr expect_doppelganger
-#' @import knitr
+#' @import knitr rmarkdown testthat
 NULL
