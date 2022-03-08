@@ -3,3 +3,5 @@
 ^\.github$
 ^README.Rmd
 ^revdep$
+^CRAN-SUBMISSION$
+^cran-comments\.md$
