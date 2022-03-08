@@ -31,7 +31,7 @@ sampled as a Grid both \code{X} and \code{Y} coordinates are required.}
 
 \item{measures}{Vector. List the measures returned by \code{comspat()}. The
 default option returns the compositional diversity (\code{"CD"}), number of
-realised species combinations (\code{"NRC"}) and associatum (\code{"AS"}).
+realized species combinations (\code{"NRC"}) and associatum (\code{"AS"}).
 Relative associatum (\code{"as_rel"}) is returned by default when
 \code{"AS"} is called.}
 

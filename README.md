@@ -26,7 +26,7 @@ based on Information Theory (see Juhász-Nagy, 1967, 1976, 1984a, 1984b,
 1993; Juhász-Nagy & Podani, 1983).
 
 To assist users in detecting and interpreting spatial associations and
-infering assembly mechanisms, comspat offers complete spatial randomness
+inferring assembly mechanisms, comspat offers complete spatial randomness
 and random shift null models, which assists users to disentangle the
 textural, intraspecific, and interspecific effects on the observed
 spatial patterns. Our open-sourced package provides a vignette that
@@ -128,3 +128,6 @@ Juhász-Nagy, P. (1984b). Spatial dependence of plant populations. Part
 
 Juhász-Nagy, P. (1993). Notes on compositional diversity.
 *Hydrobiologia*, 249, 173–182.
+
+Tsakalos, J.L. (2022). comspat: an R package to analyze within-community spatial
+organization using species combinations. *Ecography*, doi: 10.1111/ecog.06216.

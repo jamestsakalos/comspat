@@ -225,7 +225,7 @@
         unique_comb <- as.matrix(prova2_temp[, !duplicated(t(prova2_temp))])
       }
 
-      # NUMBER OF REALISED COMBINATIONS
+      # NUMBER OF REALIZED COMBINATIONS
       results[["NRC"]][q, step] <- ncol(unique_comb)
 
       # LOCAL ENTROPY AND THE LOCAL DISTINCTIVNESS
@@ -742,7 +742,7 @@
 ##' @param type Character. Supply either \code{"Grid"} or \code{"Transect"}.
 ##' @param measures Vector. List the measures returned by \code{comspat()}. The
 ##' default option returns the compositional diversity (\code{"CD"}), number of
-##' realised species combinations (\code{"NRC"}) and associatum (\code{"AS"}).
+##' realized species combinations (\code{"NRC"}) and associatum (\code{"AS"}).
 ##' Relative associatum (\code{"as_rel"}) is returned by default when
 ##' \code{"AS"} is called.
 ##' @param randomization_type Character. Supply either \code{"CSR"} or

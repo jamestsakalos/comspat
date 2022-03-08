@@ -4,8 +4,7 @@ citEntry(
   entry    = "Article",
   title    = "comspat: an R package to analyze within-community spatial
   organization using species combinations",
-  author   = personList(person(given = "James", family = "Tsakalos",
-                                  middle = "L"),
+  author   = personList(person(given = "James L", family = "Tsakalos"),
                         person(given = "Stefano", family = "Chelli"),
                         person(given = "Giandiego", family = "Campetella"),
                         person(given = "Roberto", family = "Canullo"),

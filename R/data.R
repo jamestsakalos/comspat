@@ -114,9 +114,9 @@
 ##' Parameter data for the secondary sampling of a grid
 ##'
 ##' A data frame containing information on the size and shape of secondary
-##' sampling units for the \code{ComSpat} function.
+##' sampling units for the \code{comspat} function.
 ##'
-##' The \code{ComSpat} function requires spatially explicit information. The
+##' The \code{comspat} function requires spatially explicit information. The
 ##' \code{params} argument stores and provides spatially explicit information.
 ##' The parameter data frame for the grid and transect data (i.e.,
 ##' \code{params.grid} and \code{params.tran}) are available in the package.
@@ -156,7 +156,7 @@
 ##'
 ##' The package contains two transects with real data sampled in open
 ##' sand grassland in Hungary (Bartha et al. 2008). These real transect data
-##' sets were from Bartha et al.’s (2008) long-term study on the effect
+##' sets were from Bartha et al.'s (2008) long-term study on the effect
 ##' of climate change on the interannual variability of grassland communities.
 ##' The transect data sets represent: (1) the spatial pattern data of frequent
 ##' species (species with more than 25 presences along the transect)
@@ -170,6 +170,9 @@
 ##' this extent (transect length) is already representative of the community
 ##' pattern.
 ##'
+##' @references Bartha, S. (2008). Will interannual variability in sand
+##'  grassland communities increase with climate change?. Community Ecol.,
+##'   9: 13–21.
 ##' @docType data
 ##' @format A data frame with 713 species observations on the following two
 ##' variables.
@@ -209,6 +212,9 @@
 ##' this extent (transect length) is already representative of the community
 ##' pattern.
 ##'
+##' @references Bartha, S. (2008). Will interannual variability in sand
+##'  grassland communities increase with climate change?. Community Ecol.,
+##'   9: 13–21.
 ##' @docType data
 ##' @format A data frame with 713 species observations on the following two
 ##' variables.
@@ -234,9 +240,9 @@
 ##' Parameter data for the secondary sampling of a transect
 ##'
 ##' A data frame containing information on the size and shape of secondary
-##' sampling units for the \code{ComSpat} function.
+##' sampling units for the \code{comspat} function.
 ##'
-##' The \code{ComSpat} function requires spatially explicit information. The
+##' The \code{comspat} function requires spatially explicit information. The
 ##' \code{params} argument stores and provides spatially explicit information.
 ##' The parameter data frame for the grid and transect data (i.e.,
 ##' \code{param_grid} and \code{param_tran}) are available in the package.
