@@ -771,6 +771,7 @@
 ##' Tsakalos, J.L. et al. (2022). comspat: An R package to analyze
 ##' within-community spatial organization using species combinations. Ecography.
 ##' doi: 10.1111/ecog.06216.
+##'
 ##' @examples
 ##'
 ##' data("grid_random") #input data frame

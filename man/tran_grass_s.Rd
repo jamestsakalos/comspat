@@ -17,7 +17,7 @@ tran_grass_s
 \description{
 The package contains two transects with real data sampled in open
 sand grassland in Hungary (Bartha et al. 2008). These real transect data
-sets were from Bartha et al.㤼㸲s (2008) long-term study on the effect
+sets were from Bartha et al.’s (2008) long-term study on the effect
 of climate change on the interannual variability of grassland communities.
 The transect data sets represent: (1) the spatial pattern data of frequent
 species (species with more than 25 presences along the transect)
