@@ -1,6 +1,6 @@
 Package: comspat
 Type: Package
-Title: comspat: Analysis of Within-Community Spatial Organization
+Title: Analysis of Within-Community Spatial Organization
         using Species Combinations
 Version: 1.0.0
 Authors@R: 
@@ -28,11 +28,9 @@ Authors@R:
              family = "Bartha",
              role = "rev",
              comment=c(ORCID = "0000-0001-6331-7521")))
-Description: Contains functions useful for analysing
+Description: Contains functions useful for analyzing
         the spatial patterns of species combinations. The related measures are 
         from the Information Theory model family of Pál Juhász-Nagy.
-        Tsakalos, J.L., Chelli, S., Campetella, G., Canullo, R., Simonetti, E.,
-        and Bartha, S. (2022) <doi:10.1111/ecog.06216>.
 License: GPL-3
 Encoding: UTF-8
 BugReports: https://github.com/jamestsakalos/comspat/issues
@@ -48,9 +46,9 @@ Imports:
     future.apply,
     graphics,
     knitr,
-    rmarkdown,
     stats,
-    testthat,
-    vdiffr
+    vdiffr,
+    rmarkdown,
+    testthat
 Suggests: 
     covr
