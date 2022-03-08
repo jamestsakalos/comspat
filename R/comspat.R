@@ -755,7 +755,6 @@
 ##' species as rows and the steps of scaling as columns.
 ##' @author James L. Tsakalos
 ##' @seealso \code{\link{comspat_plot}}
-##' @encoding Latin-1
 ##' @references Juhász-Nagy, P. (1967). On some 'characteristic area' of plant
 ##' community stands. Proc. Colloq. Inf. Theor. 269-282.
 ##'
@@ -764,7 +763,7 @@
 ##' Hung. 22: 61-78.
 ##'
 ##' Juhász-Nagy, P. (1984a). Notes on diversity. Part, I. Introduction. Abstr.
-##' Bot. 8: 43-55. \&#225
+##' Bot. 8: 43-55.
 ##'
 ##' Juhász-Nagy, P. (1984b). Spatial dependence of plant populations. Part 2. A
 ##' family of new models. Acta Bot. Acad Sci. Hung. 30: 363-402.
