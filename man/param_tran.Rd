@@ -16,10 +16,10 @@ param_tran
 }
 \description{
 A data frame containing information on the size and shape of secondary
-sampling units for the \code{ComSpat} function.
+sampling units for the \code{comspat} function.
 }
 \details{
-The \code{ComSpat} function requires spatially explicit information. The
+The \code{comspat} function requires spatially explicit information. The
 \code{params} argument stores and provides spatially explicit information.
 The parameter data frame for the grid and transect data (i.e.,
 \code{param_grid} and \code{param_tran}) are available in the package.
