@@ -28,13 +28,15 @@ Authors@R:
              family = "Bartha",
              role = "rev",
              comment=c(ORCID = "0000-0001-6331-7521")))
-Description:  This package uses grid or transect data sets to measure the 
-  number of realized species combinations and the Shannon diversity of realized 
-  species combinations as a function of spatial scale. Classical Shannon
-  diversity measures biodiversity based on the number and relative abundance of
-  species, whereas the specific version of Shannon diversity presented here
-  characterizes biodiversity and provides information on species coexistence
-  relationships.
+Description:  The diversity of species combinations observable in sampling units
+  reflects a species’ uneven distribution and preference for specific abiotic
+  and biotic conditions. This package uses grid or transect data sets to measure
+  the number of realized species combinations and the Shannon diversity of 
+  realized species combinations as a function of spatial scale. Classical
+  Shannon diversity measures biodiversity based on the number and relative
+  abundance of species, whereas the specific version of Shannon diversity
+  presented here characterizes biodiversity and provides information on species
+  coexistence relationships.
 License: GPL-3
 Encoding: UTF-8
 BugReports: https://github.com/jamestsakalos/comspat/issues
