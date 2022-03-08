@@ -154,10 +154,10 @@
 ##' data("param_grid")
 ##'
 ##' # Perform comspat calculations
-##' temp_rand <- comspat(grid_random, param_grid[1:5, ], 64, "Grid")
+##' temp_rand <- comspat(grid_random, param_grid[1:2, ], 64, "Grid")
 ##'
 ##' # Plot comspat results
-##' comspat_plot(list(temp_rand), param_grid[1:5, ], "Grid",
+##' comspat_plot(list(temp_rand), param_grid[1:2, ], "Grid",
 ##' measure = "NRC", su_size = 0.01, ymin = 0, ymax = 65,
 ##' p_col = list("red"))
 ##'

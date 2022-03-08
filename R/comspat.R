@@ -776,7 +776,7 @@
 ##'
 ##' data("grid_random") #input data frame
 ##' data("param_grid") #input parameter data frame
-##' temp <- comspat(data = grid_random, params = param_grid[1:5, ],
+##' temp <- comspat(data = grid_random, params = param_grid[1:2, ],
 ##'  dim_max = 64, type = "Grid")
 ##' @export
 
