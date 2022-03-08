@@ -32,7 +32,7 @@ Description: Contains functions useful for analysing
         the spatial patterns of species combinations. The related measures are 
         from the Information Theory model family of Pál Juhász-Nagy.
         Tsakalos, J.L., Chelli, S., Campetella, G., Canullo, R., Simonetti, E.,
-        and Bartha, S. (2022) <doi:10.1111/ecog.06216>
+        and Bartha, S. (2022) <doi:10.1111/ecog.06216>.
 License: GPL-3
 Encoding: UTF-8
 BugReports: https://github.com/jamestsakalos/comspat/issues

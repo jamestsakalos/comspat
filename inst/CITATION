@@ -1,0 +1,25 @@
+citHeader("To cite comspat in publications use:")
+
+citEntry(
+  entry    = "Article",
+  title    = "comspat: an R package to analyze within-community spatial
+  organization using species combinations",
+  author   = personList(person(given = "James", family = "Tsakalos",
+                                  middle = "L"),
+                        person(given = "Stefano", family = "Chelli"),
+                        person(given = "Giandiego", family = "Campetella"),
+                        person(given = "Roberto", family = "Canullo"),
+                        person(given = "Enrico", family = "Simonetti"),
+                        person(given = "Sandor", family = "Bartha")),
+  journal  = "Ecography",
+  year     = "2020",
+  volume   = "",
+  number   = "",
+  pages    = "",
+  url      = "10.1111/ecog.06216",
+  textVersion = paste(
+  "Tsakalos, J.L., Chelli, S., Campetella, G., Canullo, R., Simonetti, E., &
+  Bartha, S. 2022. comspat: an R package to analyze within-community spatial
+  organization using species combinations. Ecography. doi: 10.1111/ecog.06216"
+  )
+)
