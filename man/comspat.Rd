@@ -49,7 +49,7 @@ species as rows and the steps of scaling as columns.
 }
 \description{
 The \code{comspat} function calculates Juhász-Nagy Information Theory
- models.
+models.
 }
 \details{
 The \code{comspat} function presents four measures from a family of

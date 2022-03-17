@@ -15,7 +15,7 @@ citEntry(
   volume   = "",
   number   = "",
   pages    = "",
-  url      = "10.1111/ecog.06216",
+  url      = "https://doi.org/10.1111/ecog.06216",
   textVersion = paste(
   "Tsakalos, J.L., Chelli, S., Campetella, G., Canullo, R., Simonetti, E., &
   Bartha, S. 2022. comspat: an R package to analyze within-community spatial

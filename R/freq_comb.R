@@ -9,7 +9,7 @@
 ##' @param dim_max Numeric. Number of sampling units in one row of a
 ##' \code{"Grid"} or \code{"Transect"}.
 ##'
-##' ##' @return The function returns an object of class data.frame.
+##' @return The function returns an object of class data.frame.
 ##' @author James L. Tsakalos
 ##' @seealso \code{\link{comspat}}, \code{\link{data}}
 ##' @examples

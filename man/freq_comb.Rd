@@ -12,9 +12,10 @@ freq_comb(data, type, dim_max)
 \item{type}{Character. Supply either \code{"Grid"} or \code{"Transect"}.}
 
 \item{dim_max}{Numeric. Number of sampling units in one row of a
-\code{"Grid"} or \code{"Transect"}.
-
-##' @return The function returns an object of class data.frame.}
+\code{"Grid"} or \code{"Transect"}.}
+}
+\value{
+The function returns an object of class data.frame.
 }
 \description{
 Function \code{freq_comb} extracts the combinational frequency of species.

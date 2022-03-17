@@ -720,10 +720,11 @@
   return(results_final)
 }
 
+
 ##' Within-Community Spatial Organization
 ##'
 ##' The \code{comspat} function calculates Juhász-Nagy Information Theory
-##'  models.
+##' models.
 ##'
 ##' The \code{comspat} function presents four measures from a family of
 ##' Information Theory models developed by Juhász-Nagy (1967, 1976, 1984a,

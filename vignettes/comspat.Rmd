@@ -959,7 +959,7 @@ Podani, J. (1984). Analysis of mapped and simulated vegetation patterns by means
 
 Podani, J., Czárán, T., & Bartha, S (1993). Pattern, area and diversity: the importance of spatial scale in species assemblages. *Abstracta Botanica*, 17, 37--51.
 
-Rejmánek, M., & Lepš, J. (1966). Negative associations can reveal interspecific competition and reversal of competititve hierarchies during succession. *Oikos*, 76, 161--168.
+Rejmánek, M., & Lepš, J. (1966). Negative associations can reveal interspecific competition and reversal of competitive hierarchies during succession. *Oikos*, 76, 161--168.
 
 Tsakalos, J.L., Chelli, S., Campetella, G., Canullo, R., Simonetti, E., Bartha, S. (2022). comspat: An R package to analyze within community spatial association.
 

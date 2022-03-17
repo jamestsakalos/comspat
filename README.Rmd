@@ -33,7 +33,7 @@ spatial scale. NRC and CD represent two measures from a model family developed
 by Pál Juhász-Nagy based on Information Theory (see Juhász-Nagy, 1967, 1976,
 1984a, 1984b, 1993; Juhász-Nagy & Podani, 1983).
 
-To assist users in detecting and interpreting spatial associations and infering
+To assist users in detecting and interpreting spatial associations and inferring
 assembly mechanisms, comspat offers complete spatial randomness and random shift
 null models, which assists users to disentangle the textural, intraspecific, and
 interspecific effects on the observed spatial patterns. Our open-sourced package
