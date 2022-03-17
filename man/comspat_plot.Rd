@@ -10,6 +10,7 @@ comspat_plot(
   type = NULL,
   measure = NULL,
   su_size = NULL,
+  unit = "Length",
   ymin = NULL,
   ymax = NULL,
   xmin = 0.01,
@@ -35,13 +36,15 @@ comspat_plot(
 
 \item{su_size}{Numeric. Surface area of the smallest sampling unit (mm sq.).}
 
+\item{unit}{Character. Supply either \code{"Length"} or \code{"Area"}.}
+
 \item{ymin}{Numeric. Y axis lower limit.}
 
 \item{ymax}{Numeric. Y axis upper limit.}
 
 \item{xmin}{Numeric. Minimum x axis value (i.e. lower range).}
 
-\item{xmax}{Numeric. Maximum x axis value (i.e. upper range).##'}
+\item{xmax}{Numeric. Maximum x axis value (i.e. upper range).}
 
 \item{p_col}{list of colors. Single or a vector matching data length.}
 
@@ -59,16 +62,21 @@ comspat_plot(
 }
 \description{
 Function \code{comspat_plot} makes use of core R graphics systems to
-display several Information Theory metrics. The \code{comspat_plot} does
-not calculate the actual Information Theory metrics, but it accepts results
-from the \code{\link{comspat}} function.
+display relationship between the Information Theory metrics
+(i.e. CD, NRC, etc.) and the length (default) or area of the sampling units.
+The \code{comspat_plot} does not calculate the Information Theory metrics,
+but it accepts results from the \code{\link{comspat}} function.
 }
 \details{
-\code{comspat_plot} is used to construct the initial plot object. It has
-the functionality to return single or multiple outputs. When multiple
-outputs are returned data must be supplied as a list; a single measure for
-each of the data frames will be added to the same plot. This function makes
-use of core R graphics systems.
+\code{comspat_plot} constructs the initial plot object. It has the
+functionality to return single or multiple outputs. When multiple outputs
+are returned the data must be supplied as a list; a single measure for
+each of the data frames will be added to the same plot. Confidence intervals
+generated from the use of null models (i.e. CSR and RS randomizations) can
+be added as lines or polygons (see the \code{"ci_type"} argument).
+
+This function and makes use of core R graphics systems to explore the
+outputs of \code{comspat_plot}.
 }
 \examples{
 

@@ -118,26 +118,32 @@
 ##' Within-Community Spatial Organization Plot
 ##'
 ##' Function \code{comspat_plot} makes use of core R graphics systems to
-##' display several Information Theory metrics. The \code{comspat_plot} does
-##' not calculate the actual Information Theory metrics, but it accepts results
-##' from the \code{\link{comspat}} function.
+##' display relationship between the Information Theory metrics
+##' (i.e. CD, NRC, etc.) and the length (default) or area of the sampling units.
+##' The \code{comspat_plot} does not calculate the Information Theory metrics,
+##' but it accepts results from the \code{\link{comspat}} function.
 ##'
-##' \code{comspat_plot} is used to construct the initial plot object. It has
-##' the functionality to return single or multiple outputs. When multiple
-##' outputs are returned data must be supplied as a list; a single measure for
-##' each of the data frames will be added to the same plot. This function makes
-##' use of core R graphics systems.
+##' \code{comspat_plot} constructs the initial plot object. It has the
+##' functionality to return single or multiple outputs. When multiple outputs
+##' are returned the data must be supplied as a list; a single measure for
+##' each of the data frames will be added to the same plot. Confidence intervals
+##' generated from the use of null models (i.e. CSR and RS randomizations) can
+##' be added as lines or polygons (see the \code{"ci_type"} argument).
+##'
+##' This function and makes use of core R graphics systems to explore the
+##' outputs of \code{comspat_plot}.
 ##'
 ##' @param data list of data frames or statistical output returned from
 ##' \code{comspat}.
 ##' @param params Data frame providing the secondary sampling information.
 ##' @param type Character. Supply either \code{"Grid"} or \code{"Transect"}.
+##' @param unit Character. Supply either \code{"Length"} or \code{"Area"}.
 ##' @param measure Character. Supply one of \code{"CD", "NRC", "AS"}.
 ##' @param su_size Numeric. Surface area of the smallest sampling unit (mm sq.).
 ##' @param ymin Numeric. Y axis lower limit.
 ##' @param ymax Numeric. Y axis upper limit.
 ##' @param xmin Numeric. Minimum x axis value (i.e. lower range).
-##' @param xmax Numeric. Maximum x axis value (i.e. upper range).##'
+##' @param xmax Numeric. Maximum x axis value (i.e. upper range).
 ##' @param p_col list of colors. Single or a vector matching data length.
 ##' @param p_cex Numeric.
 ##' @param cex_axis Numeric.
@@ -165,7 +171,7 @@
 ##' @export
 
 comspat_plot <- function(data = NULL, params = NULL, type = NULL,
-                         measure = NULL, su_size = NULL,
+                         measure = NULL, su_size = NULL, unit = "Length",
                          ymin = NULL, ymax = NULL, xmin = 0.01, xmax = 100,
                          p_col = "black", p_cex = 0.75, cex_axis = 1,
                          xaxt = TRUE, yaxt = TRUE,
@@ -195,7 +201,16 @@ comspat_plot <- function(data = NULL, params = NULL, type = NULL,
     for (i in seq(data)) {
 
       temp_1 <- apply(data[[i]][[measure]], 2, max)
-      temp_2 <- params[["Length.of.plots"]] ^ 2 * su_size
+
+      # Choose to plot length or area on x axis
+      switch(unit,
+             "Length" = {
+               temp_2 <- params[["Length.of.plots"]] * su_size
+             },
+             "Area" = {
+               temp_2 <- params[["Length.of.plots"]] ^ 2 * su_size
+             }
+      )
 
       if (measure == "AS" || measure == "AS.REL") {
         as_las <- 0
