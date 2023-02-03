@@ -60,6 +60,10 @@ comspat_plot(
 
 \item{ci_type}{l or py. Confidence interval as line or polygon.}
 }
+\value{
+The function does not return a value, rather it returns a plot
+object to assist users in interpreting the results.
+}
 \description{
 Function \code{comspat_plot} makes use of core R graphics systems to
 display relationship between the Information Theory metrics

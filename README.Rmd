@@ -46,6 +46,9 @@ Suggestions, ideas and references of new algorithms are always welcome.
 ## News
 
 * February-2022: Version 1.0
+* February-2023: Version 1.1.0
+  * Inclusion of two additional entropy functions
+  * Inclusion of classical species richness and Shannon diversity measures
 
 :::: {style="display: flex;"}
 
@@ -57,6 +60,7 @@ Suggestions, ideas and references of new algorithms are always welcome.
 a function of spatial scale, specifically;
   * the number of realized (observed) species combinations (NRC)
   * the Shannon diversity of realized species combinations (Compositional Diversity; CD)
+  * the Associatum (AS) and relativized associatum (AS_REL)
 * Allows for the application of null models:
   * complete spatial randomness (CSR) helps to show the combined effects of 
   individual species level spatial aggregations and interspecific associations
@@ -93,7 +97,7 @@ And the development version from [GitHub](https://github.com/jamestsakalos/comsp
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("jamestsakalos/comspat")
+devtools::install_github("jamestsakalos/comspat", build_vignettes = TRUE)
 ```
 ## Example
 

@@ -137,8 +137,14 @@
         }
 
         indice <- matrix(data_r[down_cond, across_cond])
-        temp_2[, posit] <- row.names(temp_2) %in%
-          data[data[["index"]] %in% as.vector(indice), "Species"]
+
+        # This part makes the formula presense absence
+        # For Shannon I need the abundance
+        ##temp_2[, posit] <- row.names(temp_2) %in%
+        ##  data[data[["index"]] %in% as.vector(indice), "Species"]
+
+        temp_2[, posit] <-
+          table(data[data[["index"]] %in% as.vector(indice), "Species"])
       }
     }
   } else {
@@ -210,7 +216,14 @@
 
   for (step in 1:steps) {
 
+    # Create resampled matrix (species as row.names, SUs as columns)
     temp_2 <- .sample_species(data, dim_max, params, step, data_r, type, nsp)
+
+    # Calculate alpha diversity (species richness)
+    results[["S_RICH"]][step, ] <- colSums(temp_2  > 0)
+
+    # Calculate Shannon diversity
+    results[["H"]][step, ] <- vegan::diversity((temp_2), "shannon", MARGIN = 2)
 
     for (q in 1:dim(temp_2)[1]) {
 
@@ -278,6 +291,7 @@
     }
   }
   return(results)
+  #return(temp_2)
 }
 
 .reflector <- function(data = data, control = NULL) {
@@ -574,7 +588,8 @@
 
       for (sp in unique(data_r[, "Species"])) {
         data_r[data_r$Species == sp, "X"] <-
-          sample(c(1:dim_max), size = length(data_r[data_r$Species == sp, "X"]))
+          sample(unique(as.numeric(data_r[, "X"])),
+                 size = length(data_r[data_r$Species == sp, "X"]))
       }
 
       data_r <- data_r[order(data_r$X), ]
@@ -671,11 +686,18 @@
   nrc_rand <- matrix(1, nsp, steps)
   dimnames(nrc_rand) <- dimnames(cd_rand)
 
+  # Total SU length needs to be adjusted if grid
+  dim_su <- dim_max
+  if( (type == "Grid")) dim_su <- dim_max ^ 2
+
   # Create a list object to fill with the new parameters
   results <- list("CD" = cd_rand, "NRC" = nrc_rand, "AS" = cd_rand,
-                  "AS_REL" = cd_rand, "LD" = cd_rand)
+                  "AS_REL" = cd_rand, "LD" = cd_rand,
+                  "S_RICH" = matrix(NA, nrow = steps, ncol = dim_su),
+                  "H" = matrix(NA, nrow = steps, ncol = dim_su))
+
   rm(cd_rand, nrc_rand)
-  names(results) <- c("CD", "NRC", "AS", "AS_REL", "LD")
+  names(results) <- c("CD", "NRC", "AS", "AS_REL", "LD", "S_RICH", "H")
 
   ##############################################################################
   ##############################################################################
@@ -712,12 +734,13 @@
   ##############################################################################
   # Preparing output data
 
-  if ("AS" %in% measures) {
-    measures <- c(measures, "AS_REL")
-  }
+  #if ("AS" %in% measures) {
+  #  measures <- c(measures, "AS_REL")
+  #}
 
-  results_final <- results[names(results) %in% measures]
-  return(results_final)
+  #results_final <- results[names(results) %in% measures]
+  #return(results_final)
+  return(results)
 }
 
 
@@ -744,7 +767,7 @@
 ##' @param measures Vector. List the measures returned by \code{comspat()}. The
 ##' default option returns the compositional diversity (\code{"CD"}), number of
 ##' realized species combinations (\code{"NRC"}) and associatum (\code{"AS"}).
-##' Relative associatum (\code{"as_rel"}) is returned by default when
+##' Relative associatum (\code{"AS_REL"}) is returned by default when
 ##' \code{"AS"} is called.
 ##' @param randomization_type Character. Supply either \code{"CSR"} or
 ##' \code{"RS"}. Activating randomization initiates parallel computing.
@@ -752,11 +775,59 @@
 ##' @param alpha Numeric. If (\code{NULL}), p value returned. Else 1 or 0.
 ##'
 ##' @return The function returns an object of class list returning named data
-##' frames specified by the \code{measures} argument. Each data frame contains
-##' species as rows and the steps of scaling as columns.
+##' frames. The variables populating the data frames are specified by the
+##' \code{measures} and/or the \code{randomization_type} arguments.
+##' To understand the different JNP functions we strongly
+##' recommend reviewing the work of Bartha et al. (1998).
+##'
+##' The following components are included within the returned object if no
+##' \code{randomization_type} is specified:
+##' \itemize{
+##' \item{CD}{ \code{-} A matrix showing the Compositional Diversity (CD)
+##' calculated for each spatial scale. CD measures the entropy of species
+##' combinations. Each spatial scale is referred to as "step" and is labeled as
+##' columns. Rows are labeled by the species involved in the calculation of CD.}
+##' \item{NRC}{ \code{-} A matrix showing the Number of Realized Combinations
+##' (NRC) calculated for each spatial scale. NRC measures the number of species
+##' combinations. Each spatial scale is referred to as "step" and is labeled as
+##' columns. Rows are labeled by the species involved in the calculation of
+##' NRC.}
+##' \item{AS}{ \code{-} A matrix showing the overall association
+##' (associatum [AS]) for the collection of species calculated for each spatial
+##' scale. AS reflects the spatial similarity and dissimilarity structure of the
+##' grid or transect. Rows are labeled according to the species involved in the
+##' calculation of AS.}
+##' \item{AS_REL}{ \code{-} A matrix showing the relative association (AS_REL)
+##' for the collection of species calculated for each spatial scale. AS_REL
+##' reflects the spatial similarity and dissimilarity structure of the grid or
+##' transect divided by CD. AS_REL should be used when comparing grids or
+##' transects containing different species richness.}
+##' \item{S_RICH}{ \code{-} A matrix showing the number of species for each
+##' spatial scale.}
+##' \item{H}{ \code{-} A matrix showing the Shannon diversity of species for
+##' each spatial scale.}
+##' }
+##'
+##' The following components are included within the returned object if a
+##' \code{randomization_type} is specified:
+##' \itemize{
+##' \item{Raw data}{ \code{-} Contains the maximum values for each of the
+##' measures (i.e., CD, NRC, AS, AS_REL, descriptions above) for each spatial
+##' scale obtained by randomization. The result of each randomization is
+##' provided as rows.}
+##' \item{Summary statistics}{ \code{-} Provides a summary for each of the
+##' measures (i.e., CD, NRC, AS, AS_REL, descriptions above) from the
+##' "Raw data". Summary statistics include: original value, mean, maximum,
+##' minimum, standard deviation, coefficient of variation, p-values and
+##' confidence intervals (all labeled as rows).}
+##' }
+##'
 ##' @author James L. Tsakalos
 ##' @seealso \code{\link{comspat_plot}}
-##' @references Juhász-Nagy, P. (1967). On some 'characteristic area' of plant
+##' @references Bartha, S, Czárán, T & Podani, J. (1998). Exploring plant
+##' community dynamics in abstract coenostate spaces.
+##'
+##' Juhász-Nagy, P. (1967). On some 'characteristic area' of plant
 ##' community stands. Proc. Colloq. Inf. Theor. 269-282.
 ##'
 ##' Juhász-Nagy, P. (1976). Spatial dependence of plant populations. Part 1.
@@ -795,7 +866,7 @@ comspat <- function(data = NULL, params = NULL, dim_max = NULL, type = NULL,
     return(.comspat_orig(data, params, dim_max, type, measures))
   } else {
 
-    # Perform analyses using randomizations and parallell computing power
+    # Perform analyses using randomizations and parallel computing power
 
     # Prepare data for randomizations
     random_dat <- .random_data(data, params, dim_max, type,
@@ -816,7 +887,8 @@ comspat <- function(data = NULL, params = NULL, dim_max = NULL, type = NULL,
                  dimnames = list(
                    names(rand[]), c(paste0(rep("step_"), 1:steps))))
 
-    out <- list("CD" = cd, "NRC" = cd, "AS" = cd, "AS_REL" = cd)
+    out <- list("CD" = cd, "NRC" = cd, "AS" = cd, "AS_REL" = cd, "LD" = cd,
+                "S_RICH" = cd, "H" = cd)
     statz <- out
 
     for (i in names(rand[])) {
@@ -833,8 +905,8 @@ comspat <- function(data = NULL, params = NULL, dim_max = NULL, type = NULL,
 
     cd <- matrix(0, length(vars), steps,
                  dimnames = list(c(vars), c(paste0(rep("step_"), 1:steps))))
-
-    statz <- list("CD" = cd, "NRC" = cd, "AS" = cd, "AS_REL" = cd)
+    statz <- list("CD" = cd, "NRC" = cd, "AS" = cd, "AS_REL" = cd, "LD" = cd,
+                  "S_RICH" = cd, "H" = cd)
 
     for (i in names(out[])) {
 

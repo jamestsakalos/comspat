@@ -75,6 +75,10 @@ We provide two transects with real data sampled in open sand grassland in Hungar
 ```{r, fig.width = 7.1, fig.cap="**Fig. S2**. Spatial distribution of the patchy associated, patchy no interspecific association and completely random (i.e. the grid patchy_associated, grid_patchy_n_isc and grid_mixed_random, resp.) data sets."}
 # View the species spatial distributions
 
+# Store user default parameter arguments to reset on exit
+oldpar <- par(no.readonly = TRUE)
+on.exit(par(oldpar))
+
 # Set plot parameters
 par(mar = c(0.5, 0.5, 0.5, 0.5), pty = "s", ps = 12, mfrow = c(1, 3))
 colvec <- sample(c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e",
@@ -924,6 +928,7 @@ legend(x = 0.013, y = -1.5, legend = c("Observed", "CSR 95% CI", "RS 95% CI"),
        col = c("black", "blue", "red"),
        ncol = 2, cex = 0.8,
        xpd = NA)
+
 ```
 
 The real transect data sets were derived from Bartha et al.'s (2008) long-term study on the effect of climate change on the interannual variability of grassland communities. The observed patterns deviate significantly from CSR expectation but they did not differ from the null distribution produced by RS. This results suggest that interspecific interactions might have limited role for shaping the spatial patterns of species in this open grasslands while abiotic factors (soil heterogeneity, weather extremes) might be more important . Here we have analyzed only a single measure in time; the manuscript (and its strength) lies strongly in its long term (9 monitoring years) repeated measure sampling design.

@@ -44,8 +44,50 @@ Relative associatum (\code{"as_rel"}) is returned by default when
 }
 \value{
 The function returns an object of class list returning named data
-frames specified by the \code{measures} argument. Each data frame contains
-species as rows and the steps of scaling as columns.
+frames. The variables populating the data frames are specified by the
+\code{measures} and/or the \code{randomization_type} arguments.
+To understand the different JNP functions we strongly
+recommend reviewing the work of Bartha et al. (1998).
+
+The following components are included within the returned object if no
+\code{randomization_type} is specified:
+\itemize{
+\item{CD}{ \code{-} A matrix showing the Compositional Diversity (CD)
+calculated for each spatial scale. CD measures the entropy of species
+combinations. Each spatial scale is referred to as "step" and is labeled as
+columns. Rows are labeled by the species involved in the calculation of CD.}
+\item{NRC}{ \code{-} A matrix showing the Number of Realized Combinations
+(NRC) calculated for each spatial scale. NRC measures the number of species
+combinations. Each spatial scale is referred to as "step" and is labeled as
+columns. Rows are labeled by the species involved in the calculation of
+NRC.}
+\item{AS}{ \code{-} A matrix showing the overall association
+(associatum [AS]) for the collection of species calculated for each spatial
+scale. AS reflects the spatial similarity and dissimilarity structure of the
+grid or transect. Rows are labeled according to the species involved in the
+calculation of AS.}
+\item{AS_REL}{ \code{-} A matrix showing the relative association (AS_REL)
+for the collection of species calculated for each spatial scale. AS_REL
+reflects the spatial similarity and dissimilarity structure of the grid or
+transect divided by CD. AS_REL should be used when comparing grids or
+transects containing different species richness.}
+\item{S_RICH}{ \code{-} XXXXXXXXXXXXXXX.}
+\item{H}{ \code{-} XXXXXXXXXXXXXXX.}
+}
+
+The following components are included within the returned object if a
+\code{randomization_type} is specified:
+\itemize{
+\item{Raw data}{ \code{-} Contains the maximum values for each of the
+measures (i.e., CD, NRC, AS, AS_REL, descriptions above) for each spatial
+scale obtained by randomization. The result of each randomization is
+provided as rows.}
+\item{Summary statistics}{ \code{-} Provides a summary for each of the
+measures (i.e., CD, NRC, AS, AS_REL, descriptions above) from the
+"Raw data". Summary statistics include: original value, mean, maximum,
+minimum, standard deviation, coefficient of variation, p-values and
+confidence intervals (all labeled as rows).}
+}
 }
 \description{
 The \code{comspat} function calculates Juhász-Nagy Information Theory
@@ -66,6 +108,9 @@ temp <- comspat(data = grid_random, params = param_grid[1:2, ],
  dim_max = 64, type = "Grid")
 }
 \references{
+Bartha, S, Czárán, T & Podani, J. (1998). Exploring plant
+community dynamics in abstract coenostate spaces.
+
 Juhász-Nagy, P. (1967). On some 'characteristic area' of plant
 community stands. Proc. Colloq. Inf. Theor. 269-282.
 

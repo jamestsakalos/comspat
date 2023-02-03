@@ -6,9 +6,9 @@
   # This is a helper function which checks the data structure for potential
   # problems for plotting
 
-  if (is.null(data) | !class(data) == "list")
+  if (is.null(data) | !inherits(data, "list"))
     stop("data must be of length one of class list")
-  if (class(data) == "list" && length(data) >= 2 && !class(p_col) == "list")
+  if (inherits(data, "list") && length(data) >= 2 && !inherits(p_col, "list"))
     stop("p_col must be a list of length matching data")
   if (is.null(params))
     stop("paramater data is null")
@@ -151,6 +151,10 @@
 ##' @param yaxt TRUE or FALSE. Controls if y-axis text is displayed.
 ##' @param stats_output TRUE or FALSE. Controls if confidence intervals display.
 ##' @param ci_type l or py. Confidence interval as line or polygon.
+##'
+##' @return The function does not return a value, rather it returns a plot
+##' object to assist users in interpreting the results.
+##'
 ##' @author James L. Tsakalos
 ##' @seealso \code{\link{comspat}}, \code{\link{data}}
 ##' @examples

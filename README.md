@@ -26,12 +26,12 @@ based on Information Theory (see Juhász-Nagy, 1967, 1976, 1984a, 1984b,
 1993; Juhász-Nagy & Podani, 1983).
 
 To assist users in detecting and interpreting spatial associations and
-inferring assembly mechanisms, comspat offers complete spatial randomness
-and random shift null models, which assists users to disentangle the
-textural, intraspecific, and interspecific effects on the observed
-spatial patterns. Our open-sourced package provides a vignette that
-describes the method and reproduces the figures from this paper to help
-users contextualize and apply functions to their data.
+inferring assembly mechanisms, comspat offers complete spatial
+randomness and random shift null models, which assists users to
+disentangle the textural, intraspecific, and interspecific effects on
+the observed spatial patterns. Our open-sourced package provides a
+vignette that describes the method and reproduces the figures from this
+paper to help users contextualize and apply functions to their data.
 
 For any questions, comments or bug reports please submit an issue here
 on GitHub. Suggestions, ideas and references of new algorithms are
@@ -39,7 +39,11 @@ always welcome.
 
 ## News
 
--   February-2022: Version 1.0
+- February-2022: Version 1.0
+- February-2023: Version 1.1.0
+  - Inclusion of two additional entropy functions
+  - Inclusion of classical species richness and Shannon diversity
+    measures
 
 <div style="display: flex;">
 
@@ -47,19 +51,19 @@ always welcome.
 
 ## Main functionalities
 
--   Calculates two information theory models based on species
-    combinations as a function of spatial scale, specifically;
-    -   the number of realized (observed) species combinations (NRC)
-    -   the Shannon diversity of realized species combinations
-        (Compositional Diversity; CD)
--   Allows for the application of null models:
-    -   complete spatial randomness (CSR) helps to show the combined
-        effects of individual species level spatial aggregations and
-        interspecific associations on observed (realized) coexistence
-        relationships
-    -   random shift (RS) helps to show the effects of interspecific
-        associations after removing the effects of intraspecific
-        aggregations on observed (realized) coexistence relationships
+- Calculates two information theory models based on species combinations
+  as a function of spatial scale, specifically;
+  - the number of realized (observed) species combinations (NRC)
+  - the Shannon diversity of realized species combinations
+    (Compositional Diversity; CD)
+  - the Associatum (AS) and relativized associatum (AS_REL)
+- Allows for the application of null models:
+  - complete spatial randomness (CSR) helps to show the combined effects
+    of individual species level spatial aggregations and interspecific
+    associations on observed (realized) coexistence relationships
+  - random shift (RS) helps to show the effects of interspecific
+    associations after removing the effects of intraspecific
+    aggregations on observed (realized) coexistence relationships
 
 </div>
 
@@ -68,7 +72,9 @@ always welcome.
 <br /> <br /> <br />
 
 <center>
-<img src="https://github.com/jamestsakalos/ComSpat/blob/master/vignettes/Animation_3_Steps.gif?raw=true" style="width:65.0%" />
+<img
+src="https://github.com/jamestsakalos/ComSpat/blob/master/vignettes/Animation_3_Steps.gif?raw=true"
+style="width:65.0%" />
 </center>
 
 </div>
@@ -89,7 +95,7 @@ And the development version from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("jamestsakalos/comspat")
+devtools::install_github("jamestsakalos/comspat", build_vignettes = TRUE)
 ```
 
 ## Example
@@ -128,6 +134,3 @@ Juhász-Nagy, P. (1984b). Spatial dependence of plant populations. Part
 
 Juhász-Nagy, P. (1993). Notes on compositional diversity.
 *Hydrobiologia*, 249, 173–182.
-
-Tsakalos, J.L. (2022). comspat: an R package to analyze within-community spatial
-organization using species combinations. *Ecography*, doi: 10.1111/ecog.06216.
