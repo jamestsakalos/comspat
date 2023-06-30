@@ -746,42 +746,30 @@
 
 ##' Within-Community Spatial Organization
 ##'
-##' The \code{comspat} function calculates Juhász-Nagy Information Theory
-##' models.
+##' The `comspat()` function calculates Juhász-Nagy Information Theory models.
 ##'
-##' The \code{comspat} function presents four measures from a family of
-##' Information Theory models developed by Juhász-Nagy (1967, 1976, 1984a,
-##' 1984b). The measures represent co-existence relationships in multispecies
-##' communities. For additional information on the measures please see the
-##' package vignette.
+##' The `comspat()` function presents four measures from a family of Information
+##' Theory models developed by Juhász-Nagy (1967, 1976, 1984a, 1984b). The
+##' measures represent co-existence relationships in multispecies communities.
+##' For additional information on the measures please see the package vignette.
 ##'
-##' @param data A matrix or data frame capturing the spatial coordinate(s) of
-##' species sampled from a grid or transect. Each row captures the
-##' coordinate(s) of a \code{Species}. If the \code{data} was sampled as a
-##' Transect only the \code{X} coordinate is required.  If the \code{data} was
-##' sampled as a Grid both \code{X} and \code{Y} coordinates are required.
-##' @param params Data frame providing the secondary sampling information.
-##' @param dim_max Numeric. Number of sampling units in one row of a
-##' \code{"Grid"} or \code{"Transect"}.
-##' @param type Character. Supply either \code{"Grid"} or \code{"Transect"}.
-##' @param measures Vector. List the measures returned by \code{comspat()}. The
-##' default option returns the compositional diversity (\code{"CD"}), number of
-##' realized species combinations (\code{"NRC"}) and associatum (\code{"AS"}).
-##' Relative associatum (\code{"AS_REL"}) is returned by default when
-##' \code{"AS"} is called.
-##' @param randomization_type Character. Supply either \code{"CSR"} or
-##' \code{"RS"}. Activating randomization initiates parallel computing.
-##' @param iterations Numeric. Number of randomizations. The default is 999.
-##' @param alpha Numeric. If (\code{NULL}), p value returned. Else 1 or 0.
+##' @template output_data_param
+##' @template output_params_param
+##' @template output_dim_max_param
+##' @template output_type_param
+##' @template output_measures_param
+##' @template output_randomization_type_param
+##' @template output_iterations_param
+##' @template output_alpha_param
 ##'
 ##' @return The function returns an object of class list returning named data
 ##' frames. The variables populating the data frames are specified by the
-##' \code{measures} and/or the \code{randomization_type} arguments.
-##' To understand the different JNP functions we strongly
-##' recommend reviewing the work of Bartha et al. (1998).
+##' `measures` and/or the `randomization_type` arguments. To understand the
+##' different JNP functions we strongly recommend reviewing the work of
+##' Bartha et al. (1998).
 ##'
 ##' The following components are included within the returned object if no
-##' \code{randomization_type} is specified:
+##' `randomization_type` is specified:
 ##' \itemize{
 ##' \item{CD}{ \code{-} A matrix showing the Compositional Diversity (CD)
 ##' calculated for each spatial scale. CD measures the entropy of species
@@ -823,33 +811,39 @@
 ##' }
 ##'
 ##' @author James L. Tsakalos
-##' @seealso \code{\link{comspat_plot}}
-##' @references Bartha, S, Czárán, T & Podani, J. (1998). Exploring plant
-##' community dynamics in abstract coenostate spaces.
+##' @seealso The display options of [`comspat_plot()`].
+##' @references Bartha, S, Cz&aacute;r&aacute;n, T & Podani, J. (1998).
+##' Exploring plant community dynamics in abstract coenostate spaces.
+##' Abstr. Bot. 22, 49&ndash;66.
 ##'
 ##' Juhász-Nagy, P. (1967). On some 'characteristic area' of plant
-##' community stands. Proc. Colloq. Inf. Theor. 269-282.
+##' community stands. Proc. Colloq. Inf. Theor. 269&ndash;282.
 ##'
 ##' Juhász-Nagy, P. (1976). Spatial dependence of plant populations. Part 1.
 ##' Equivalence analysis (an outline for a new model). Acta Bot. Acad Sci.
-##' Hung. 22: 61-78.
+##' Hung. 22: 61&ndash;78.
 ##'
 ##' Juhász-Nagy, P. (1984a). Notes on diversity. Part, I. Introduction. Abstr.
-##' Bot. 8: 43-55.
+##' Bot. 8: 43&ndash;55.
 ##'
 ##' Juhász-Nagy, P. (1984b). Spatial dependence of plant populations. Part 2. A
-##' family of new models. Acta Bot. Acad Sci. Hung. 30: 363-402.
+##' family of new models. Acta Bot. Acad Sci. Hung. 30: 363&ndash;402.
 ##'
 ##' Tsakalos, J.L. et al. (2022). comspat: An R package to analyze
 ##' within-community spatial organization using species combinations. Ecography.
-##' doi: 10.1111/ecog.06216.
+##' \doi{10.1111/ecog.06216}
 ##'
+##' @encoding UTF-8
 ##' @examples
 ##'
-##' data("grid_random") #input data frame
-##' data("param_grid") #input parameter data frame
-##' temp <- comspat(data = grid_random, params = param_grid[1:2, ],
-##'  dim_max = 64, type = "Grid")
+##' data("grid_random", package = "comspat") #input data frame
+##' data("param_grid", package = "comspat") #input parameter data frame
+##' temp <- comspat(
+##'   data = grid_random,
+##'   params = param_grid[1:2, ],
+##'   dim_max = 64,
+##'   type = "Grid"
+##' )
 ##' @export
 
 comspat <- function(data = NULL, params = NULL, dim_max = NULL, type = NULL,

@@ -117,59 +117,72 @@
 
 ##' Within-Community Spatial Organization Plot
 ##'
-##' Function \code{comspat_plot} makes use of core R graphics systems to
+##' The `comspat_plot()` function makes use of core R graphics systems to
 ##' display relationship between the Information Theory metrics
 ##' (i.e. CD, NRC, etc.) and the length (default) or area of the sampling units.
-##' The \code{comspat_plot} does not calculate the Information Theory metrics,
-##' but it accepts results from the \code{\link{comspat}} function.
+##' The `comspat_plot()` does not calculate the Information Theory metrics,
+##' but it accepts results from the [`comspat()`] function.
 ##'
-##' \code{comspat_plot} constructs the initial plot object. It has the
+##' `comspat_plot()` constructs the initial plot object. It has the
 ##' functionality to return single or multiple outputs. When multiple outputs
 ##' are returned the data must be supplied as a list; a single measure for
 ##' each of the data frames will be added to the same plot. Confidence intervals
 ##' generated from the use of null models (i.e. CSR and RS randomizations) can
-##' be added as lines or polygons (see the \code{"ci_type"} argument).
+##' be added as lines or polygons (see the `"ci_type"` argument).
 ##'
 ##' This function and makes use of core R graphics systems to explore the
-##' outputs of \code{comspat_plot}.
+##' outputs of `comspat_plot()`.
 ##'
 ##' @param data list of data frames or statistical output returned from
 ##' \code{comspat}.
-##' @param params Data frame providing the secondary sampling information.
-##' @param type Character. Supply either \code{"Grid"} or \code{"Transect"}.
-##' @param unit Character. Supply either \code{"Length"} or \code{"Area"}.
-##' @param measure Character. Supply one of \code{"CD", "NRC", "AS"}.
-##' @param su_size Numeric. Surface area of the smallest sampling unit (mm sq.).
+##' @template output_params_param
+##' @template output_type_param
+##' @template output_unit_param
+##' @template output_measure_param
+##' @template output_su_size_param
 ##' @param ymin Numeric. Y axis lower limit.
 ##' @param ymax Numeric. Y axis upper limit.
 ##' @param xmin Numeric. Minimum x axis value (i.e. lower range).
 ##' @param xmax Numeric. Maximum x axis value (i.e. upper range).
-##' @param p_col list of colors. Single or a vector matching data length.
+##' @template output_p_col_param
 ##' @param p_cex Numeric.
 ##' @param cex_axis Numeric.
 ##' @param xaxt TRUE or FALSE. Controls if x-axis text is displayed.
 ##' @param yaxt TRUE or FALSE. Controls if y-axis text is displayed.
-##' @param stats_output TRUE or FALSE. Controls if confidence intervals display.
-##' @param ci_type l or py. Confidence interval as line or polygon.
+##' @template output_stats_output_param
+##' @template output_ci_type_param
 ##'
 ##' @return The function does not return a value, rather it returns a plot
 ##' object to assist users in interpreting the results.
 ##'
 ##' @author James L. Tsakalos
-##' @seealso \code{\link{comspat}}, \code{\link{data}}
+##' @seealso The main [`comspat()`] function.
+##' @encoding UTF-8
 ##' @examples
 ##'
 ##' # Load the training data and parameter files
-##' data("grid_random")
-##' data("param_grid")
+##' data("grid_random", library = "comspat")
+##' data("param_grid", library = "comspat")
 ##'
 ##' # Perform comspat calculations
-##' temp_rand <- comspat(grid_random, param_grid[1:2, ], 64, "Grid")
+##' temp_rand <- comspat(
+##'   grid_random,
+##'   param_grid[1:2, ],
+##'   64,
+##'   "Grid"
+##' )
 ##'
 ##' # Plot comspat results
-##' comspat_plot(list(temp_rand), param_grid[1:2, ], "Grid",
-##' measure = "NRC", su_size = 0.01, ymin = 0, ymax = 65,
-##' p_col = list("red"))
+##' comspat_plot(
+##'   list(temp_rand),
+##'   param_grid[1:2, ],
+##'   "Grid",
+##'   measure = "NRC",
+##'   su_size = 0.01,
+##'   ymin = 0,
+##'   ymax = 65,
+##'   p_col = list("red")
+##' )
 ##'
 ##' # Hint - several measures can be combined using par() commands
 ##' @export

@@ -2,7 +2,7 @@ Package: comspat
 Type: Package
 Title: Analysis of Within-Community Spatial Organization
         using Species Combinations
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: 
     c(person(given = "James L.",
              family = "Tsakalos",
@@ -43,7 +43,7 @@ BugReports: https://github.com/jamestsakalos/comspat/issues
 URL: https://github.com/jamestsakalos/comspat
 LazyData: true
 Config/testthat/edition: 3
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 Depends:
     R (>= 3.5.0)
 VignetteBuilder: knitr
