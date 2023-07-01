@@ -134,24 +134,31 @@
 <div class="section level2">
 <h2 id="installation-from-the-source">Installation from the source<a class="anchor" aria-label="anchor" href="#installation-from-the-source"></a>
 </h2>
-<p>You can install the released version of comspat from <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> with:</p>
+<p>You can install the released version of <code>comspat</code> from <a href="https://CRAN.R-project.org" class="external-link">CRAN</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"comspat"</span><span class="op">)</span></span></code></pre></div>
 <p>And the development version from <a href="https://github.com/jamestsakalos/comspat" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jamestsakalos/comspat"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span></span>
+<span>  <span class="st">"jamestsakalos/comspat"</span>,</span>
+<span>  build_vignettes <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>This is a basic example which shows you how to use the main comspat function:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jamestsakalos/comspat" class="external-link">comspat</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/jamestsakalos/comspat" class="external-link">"comspat"</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"grid_random"</span><span class="op">)</span> <span class="co">#input data frame</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"param_grid"</span><span class="op">)</span> <span class="co">#input parameter data frame</span></span>
-<span><span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/comspat.html">comspat</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">grid_random</span>, params <span class="op">=</span> <span class="va">param_grid</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="op">]</span>, dim_max <span class="op">=</span> <span class="fl">64</span>, type <span class="op">=</span> <span class="st">"Grid"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"grid_random"</span>, package <span class="op">=</span> <span class="st">"comspat"</span><span class="op">)</span> <span class="co">#input data frame</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"param_grid"</span>, package <span class="op">=</span> <span class="st">"comspat"</span><span class="op">)</span> <span class="co">#input parameter data frame</span></span>
+<span><span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/comspat.html">comspat</a></span><span class="op">(</span></span>
+<span>  data <span class="op">=</span> <span class="va">grid_random</span>,</span>
+<span>  params <span class="op">=</span> <span class="va">param_grid</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>,<span class="op">]</span>,</span>
+<span>  dim_max <span class="op">=</span> <span class="fl">64</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"Grid"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>The package vignette provides detailed explanation and demonstration on the application of comspat.</p>
 </div>
 <div class="section level2">
@@ -163,6 +170,7 @@
 <p>Juhász-Nagy, P. (1984a). Notes on diversity. Part I. Introduction. <em>Abstracta Botanica</em>, 8, 43–55.</p>
 <p>Juhász-Nagy, P. (1984b). Spatial dependence of plant populations. Part 2. A family of new models. <em>Acta Botanica Hungarica</em>, 30, 363–402.</p>
 <p>Juhász-Nagy, P. (1993). Notes on compositional diversity. <em>Hydrobiologia</em>, 249, 173–182.</p>
+<p>Tsakalos, J.L., Chelli, S., Campetella, G., Canullo, R., Simonetti, E., &amp; Bartha, S. (2022). comspat: an R package to analyze within‐community spatial organization using species combinations. <em>Ecography</em>, 7, e06216.</p>
 </div>
 </div>
 
@@ -201,9 +209,11 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/jamestsakalos/comspat/actions" class="external-link"><img src="https://github.com/jamestsakalos/comspat/workflows/test-coverage/badge.svg" alt="test-coverage"></a></li>
+<li><a href="https://github.com/jamestsakalos/comspat/actions/workflows/test-coverage.yaml" class="external-link"><img src="https://github.com/jamestsakalos/comspat/actions/workflows/test-coverage.yaml/badge.svg" alt="test-coverage"></a></li>
 <li><a href="https://app.codecov.io/gh/jamestsakalos/comspat?branch=master" class="external-link"><img src="https://codecov.io/gh/jamestsakalos/comspat/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://github.com/jamestsakalos/comspat/actions" class="external-link"><img src="https://github.com/jamestsakalos/comspat/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/jamestsakalos/comspat/actions/workflows/lint.yaml" class="external-link"><img src="https://github.com/jamestsakalos/comspat/actions/workflows/lint.yaml/badge.svg" alt="lint"></a></li>
+<li><a href="https://github.com/jamestsakalos/comspat/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/jamestsakalos/comspat/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/jamestsakalos/comspat/actions/workflows/pkgdown.yaml" class="external-link"><img src="https://github.com/jamestsakalos/comspat/actions/workflows/pkgdown.yaml/badge.svg" alt="pkgdown"></a></li>
 </ul>
 </div>
 
