@@ -816,18 +816,18 @@
 ##' Exploring plant community dynamics in abstract coenostate spaces.
 ##' Abstr. Bot. 22, 49&ndash;66.
 ##'
-##' Juhász-Nagy, P. (1967). On some 'characteristic area' of plant
+##' Juh&aacute;sz-Nagy, P. (1967). On some 'characteristic area' of plant
 ##' community stands. Proc. Colloq. Inf. Theor. 269&ndash;282.
 ##'
-##' Juhász-Nagy, P. (1976). Spatial dependence of plant populations. Part 1.
-##' Equivalence analysis (an outline for a new model). Acta Bot. Acad Sci.
+##' Juh&aacute;sz-Nagy, P. (1976). Spatial dependence of plant populations. Part
+##' 1. Equivalence analysis (an outline for a new model). Acta Bot. Acad Sci.
 ##' Hung. 22: 61&ndash;78.
 ##'
-##' Juhász-Nagy, P. (1984a). Notes on diversity. Part, I. Introduction. Abstr.
-##' Bot. 8: 43&ndash;55.
+##' Juh&aacute;sz-Nagy, P. (1984a). Notes on diversity. Part, I. Introduction.
+##' Abstr. Bot. 8: 43&ndash;55.
 ##'
-##' Juhász-Nagy, P. (1984b). Spatial dependence of plant populations. Part 2. A
-##' family of new models. Acta Bot. Acad Sci. Hung. 30: 363&ndash;402.
+##' Juh&aacute;sz-Nagy, P. (1984b). Spatial dependence of plant populations.
+##' Part 2. A family of new models. Acta Bot. Acad Sci. Hung. 30: 363&ndash;402.
 ##'
 ##' Tsakalos, J.L. et al. (2022). comspat: An R package to analyze
 ##' within-community spatial organization using species combinations. Ecography.

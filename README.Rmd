@@ -2,10 +2,11 @@
 output: github_document
 ---
 <!-- badges: start -->
-[![test-coverage](https://github.com/jamestsakalos/comspat/workflows/test-coverage/badge.svg)](https://github.com/jamestsakalos/comspat/actions)
+[![test-coverage](https://github.com/jamestsakalos/comspat/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/jamestsakalos/comspat/actions/workflows/test-coverage.yaml)
 [![Codecov test coverage](https://codecov.io/gh/jamestsakalos/comspat/branch/master/graph/badge.svg)](https://app.codecov.io/gh/jamestsakalos/comspat?branch=master)
-[![R-CMD-check](https://github.com/jamestsakalos/comspat/workflows/R-CMD-check/badge.svg)](https://github.com/jamestsakalos/comspat/actions)
+[![lint](https://github.com/jamestsakalos/comspat/actions/workflows/lint.yaml/badge.svg)](https://github.com/jamestsakalos/comspat/actions/workflows/lint.yaml)
 [![R-CMD-check](https://github.com/jamestsakalos/comspat/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jamestsakalos/comspat/actions/workflows/R-CMD-check.yaml)
+[![pkgdown](https://github.com/jamestsakalos/comspat/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/jamestsakalos/comspat/actions/workflows/pkgdown.yaml)
 <!-- badges: end -->
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -88,28 +89,35 @@ a function of spatial scale, specifically;
 
 ## Installation from the source
 
-You can install the released version of comspat from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of `comspat` from [CRAN](https://CRAN.R-project.org) with:
 
-``` r
+``` {r loading-cran-package, message = FALSE, eval = FALSE}
 install.packages("comspat")
 ```
 
 And the development version from [GitHub](https://github.com/jamestsakalos/comspat) with:
 
-``` r
-# install.packages("devtools")
-devtools::install_github("jamestsakalos/comspat", build_vignettes = TRUE)
+``` {r loading-github-package, message = FALSE, , eval = FALSE}
+devtools::install_github(
+  "jamestsakalos/comspat",
+  build_vignettes = TRUE
+)
 ```
 ## Example
 
 This is a basic example which shows you how to use the main comspat function:
 
 ```{r example}
-library(comspat)
+library("comspat")
 
-data("grid_random") #input data frame
-data("param_grid") #input parameter data frame
-temp <- comspat(data = grid_random, params = param_grid[1:5,], dim_max = 64, type = "Grid")
+data("grid_random", package = "comspat") #input data frame
+data("param_grid", package = "comspat") #input parameter data frame
+temp <- comspat(
+  data = grid_random,
+  params = param_grid[1:5,],
+  dim_max = 64,
+  type = "Grid"
+)
 
 ```
 
@@ -118,15 +126,26 @@ the application of comspat.
 
 ## References
 
-Juhász-Nagy, P. (1967). On association among plant populations I. *Acta Biologica Debrecina*, 5, 43–56.
+Juh&aacute;sz-Nagy, P. (1967). On association among plant populations I. 
+*Acta Biologica Debrecina*, 5, 43&ndash;56.
 
-Juhász-Nagy, P. (1976). Spatial dependence of plant populations. Part 1. Equivalence analysis (an outline for a new model). *Acta Botanica Academiae Scientiarum Hungaricae*, 22, 61–78.
+Juh&aacute;sz-Nagy, P. (1976). Spatial dependence of plant populations. Part 1. 
+Equivalence analysis (an outline for a new model). 
+*Acta Botanica Academiae Scientiarum Hungaricae*, 22, 61&ndash;78.
 
-Juhász-Nagy, P. & Podani, J. (1983). Information theory methods for the study of spatial processes and succession. *Vegetatio*, 51, 129–140.
+Juh&aacute;sz-Nagy, P. & Podani, J. (1983). Information theory methods for the 
+study of spatial processes and succession. *Vegetatio*, 51, 129&ndash;140.
 
-Juhász-Nagy, P. (1984a). Notes on diversity. Part I. Introduction. *Abstracta Botanica*,
-8, 43–55.
+Juh&aacute;sz-Nagy, P. (1984a). Notes on diversity. Part I. Introduction. 
+*Abstracta Botanica*, 8, 43&ndash;55.
 
-Juhász-Nagy, P. (1984b). Spatial dependence of plant populations. Part 2. A family of new models. *Acta Botanica Hungarica*, 30, 363–402.
+Juh&aacute;sz-Nagy, P. (1984b). Spatial dependence of plant populations. Part 2.
+A family of new models. *Acta Botanica Hungarica*, 30, 363&ndash;402.
 
-Juhász-Nagy, P. (1993). Notes on compositional diversity. *Hydrobiologia*, 249, 173–182.
+Juh&aacute;sz-Nagy, P. (1993). Notes on compositional diversity. 
+*Hydrobiologia*, 249, 173&ndash;182.
+
+Tsakalos, J.L., Chelli, S., Campetella, G., Canullo, R., Simonetti, E., & 
+Bartha, S. (2022). comspat: an R package to analyze within‐community spatial
+organization using species combinations. *Ecography*, 7, e06216. 
+\doi{10.1111/ecog.06216}

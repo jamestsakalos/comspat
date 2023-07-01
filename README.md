@@ -1,10 +1,12 @@
 
 <!-- badges: start -->
 
-[![test-coverage](https://github.com/jamestsakalos/comspat/workflows/test-coverage/badge.svg)](https://github.com/jamestsakalos/comspat/actions)
+[![test-coverage](https://github.com/jamestsakalos/comspat/actions/workflows/test-coverage.yaml/badge.svg)](https://github.com/jamestsakalos/comspat/actions/workflows/test-coverage.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/jamestsakalos/comspat/branch/master/graph/badge.svg)](https://app.codecov.io/gh/jamestsakalos/comspat?branch=master)
-[![R-CMD-check](https://github.com/jamestsakalos/comspat/workflows/R-CMD-check/badge.svg)](https://github.com/jamestsakalos/comspat/actions)
+[![lint](https://github.com/jamestsakalos/comspat/actions/workflows/lint.yaml/badge.svg)](https://github.com/jamestsakalos/comspat/actions/workflows/lint.yaml)
+[![R-CMD-check](https://github.com/jamestsakalos/comspat/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jamestsakalos/comspat/actions/workflows/R-CMD-check.yaml)
+[![pkgdown](https://github.com/jamestsakalos/comspat/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/jamestsakalos/comspat/actions/workflows/pkgdown.yaml)
 <!-- badges: end -->
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -83,7 +85,7 @@ style="width:65.0%" />
 
 ## Installation from the source
 
-You can install the released version of comspat from
+You can install the released version of `comspat` from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
@@ -94,8 +96,10 @@ And the development version from
 [GitHub](https://github.com/jamestsakalos/comspat) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("jamestsakalos/comspat", build_vignettes = TRUE)
+devtools::install_github(
+  "jamestsakalos/comspat",
+  build_vignettes = TRUE
+)
 ```
 
 ## Example
@@ -104,11 +108,16 @@ This is a basic example which shows you how to use the main comspat
 function:
 
 ``` r
-library(comspat)
+library("comspat")
 
-data("grid_random") #input data frame
-data("param_grid") #input parameter data frame
-temp <- comspat(data = grid_random, params = param_grid[1:5,], dim_max = 64, type = "Grid")
+data("grid_random", package = "comspat") #input data frame
+data("param_grid", package = "comspat") #input parameter data frame
+temp <- comspat(
+  data = grid_random,
+  params = param_grid[1:5,],
+  dim_max = 64,
+  type = "Grid"
+)
 ```
 
 The package vignette provides detailed explanation and demonstration on
@@ -134,3 +143,7 @@ Juhász-Nagy, P. (1984b). Spatial dependence of plant populations. Part
 
 Juhász-Nagy, P. (1993). Notes on compositional diversity.
 *Hydrobiologia*, 249, 173–182.
+
+Tsakalos, J.L., Chelli, S., Campetella, G., Canullo, R., Simonetti, E.,
+& Bartha, S. (2022). comspat: an R package to analyze within‐community
+spatial organization using species combinations. *Ecography*, 7, e06216.
