@@ -2,7 +2,7 @@ Package: comspat
 Type: Package
 Title: Analysis of Within-Community Spatial Organization
         using Species Combinations
-Version: 1.0.2
+Version: 1.1.0
 Authors@R: 
     c(person(given = "James L.",
              family = "Tsakalos",
