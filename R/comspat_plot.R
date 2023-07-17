@@ -6,7 +6,7 @@
   # This is a helper function which checks the data structure for potential
   # problems for plotting
 
-  if (is.null(data) | !inherits(data, "list"))
+  if (is.null(data) || !inherits(data, "list"))
     stop("data must be of length one of class list")
   if (inherits(data, "list") && length(data) >= 2 && !inherits(p_col, "list"))
     stop("p_col must be a list of length matching data")
@@ -77,15 +77,15 @@
     temp_ul <- data[[i]][[measure]][11, ]
     temp_ll <- data[[i]][[measure]][12, ]
 
-    if (ci_type == 'l'){
+    if (ci_type == "l") {
       lines(temp_ul ~ temp_2, col = p_col[[which(names(data) == i)]])
       lines(temp_ll ~ temp_2, col = p_col[[which(names(data) == i)]])
     }
 
-    if (ci_type == 'py'){
-      polygon(c(temp_ul,rev(temp_ll)) ~ c(temp_2,rev(temp_2)),
+    if (ci_type == "py") {
+      polygon(c(temp_ul, rev(temp_ll)) ~ c(temp_2, rev(temp_2)),
               col = adjustcolor(p_col[[which(names(data) == i)]],
-                                alpha.f=0.5), border = NA)
+                                alpha.f = 0.5), border = NA)
     }
 
   }
@@ -99,14 +99,14 @@
          labels = c(0.01, 0.1, 1, 10, 100), cex.axis = 0.75)
   }
 
-  if (isTRUE(yaxt) & measure == "NRC") {
+  if (isTRUE(yaxt) && measure == "NRC") {
     axis(2,
          at = round(c(seq(0, ymax, 10))),
          labels = round(c(seq(0, ymax, 10))),
          cex.axis = 0.75, las = 1)
   }
 
-  if (isTRUE(yaxt) & measure == "CD") {
+  if (isTRUE(yaxt) && measure == "CD") {
     axis(2,
          at = round(c(seq(0, ymax, 1))),
          labels = round(c(seq(0, ymax, 1))),
@@ -199,7 +199,9 @@ comspat_plot <- function(data = NULL, params = NULL, type = NULL,
                              ymin, ymax, xmin, xmax,
                              p_col, p_cex, cex_axis)
 
-  if(stats_output == FALSE & is.null(ci_type)){ci_type = 'l'}
+  if (stats_output == FALSE & is.null(ci_type)) {
+    ci_type <- "l"
+  }
 
   data <- output[[1]]
   params <- output[[2]]
@@ -281,7 +283,7 @@ comspat_plot <- function(data = NULL, params = NULL, type = NULL,
 
     .comspat_plot_ci(data, params, type, measure, su_size,
                      ymin, ymax, xmin, xmax, p_col, p_cex, cex_axis,
-                     xaxt, yaxt, ci_type = 'l')
+                     xaxt, yaxt, ci_type = "l")
   }
 
 }
