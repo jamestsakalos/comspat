@@ -17,21 +17,76 @@
   return(data)
 }
 
-.data_check <- function(data = NULL, params = NULL,
-                        dim_max = NULL, type = NULL) {
+.measures_check <- function(measures) {
 
-  # This is a helper function which checks the data structure for potential
-  # problems
+  if (is.null(measures) == TRUE) {
+    warning("`measures` defaulting to CD and NRC")
+    measures <- c("CD", "NRC")
+  }
+
+  measure_options <- c("CD", "NRC", "AS", "AS_REL", "H")
+
+  if (any(!measures %in% measure_options)) {
+    stop(
+      "invalid `measures`; select from ",
+      paste(measure_options, collapse = ", ")
+    )
+  }
+
+  return(measures)
+
+}
+
+.randmization_check <- function(randomization_type) {
+
+  if (!is.null(randomization_type) &&
+      sum(!is.na(match(randomization_type, c("CSR", "RS")))) < 1) {
+    stop("randomization_type must be CSR or RS")
+  }
+
+  randomization_options <- c("CSR", "RS")
+
+  if (any(!randomization_type %in% randomization_options)) {
+    stop(
+      "invalid `randomization_type`; select from ",
+      paste(randomization_options, collapse = ", ")
+    )
+  }
+
+  return(randomization_type)
+
+}
+
+.data_prelim <- function(data, type, params, dim_max) {
 
   if (is.null(data))
     stop("data matrix is null")
-  if (is.null(type) | is.na(match(type, c("Grid", "Transect"))))
+  if (is.null(type) || is.na(match(type, c("Grid", "Transect"))))
     stop("type must be one of Grid or Transect")
   if (is.null(params))
     stop("paramater data is null")
   if (is.null(dim_max))
     stop("dim_max must be the number of plots in one row of grid
           or the total number of plots in a transect")
+
+  data_prelim <- list(data, type, params, dim_max)
+
+  return(data_prelim)
+
+}
+
+.data_check <- function(data = NULL, params = NULL,
+                        dim_max = NULL, type = NULL) {
+
+  # This is a helper function which checks the data structure for potential
+  # problems
+
+  data_prelim <- .data_prelim(data, type, params, dim_max)
+
+  data <- data_prelim[[1]]
+  type <- data_prelim[[2]]
+  params <- data_prelim[[3]]
+  dim_max <- data_prelim[[4]]
 
   if (type == "Grid") {
     if (sum(!is.na(match(colnames(data), c("Species", "X", "Y")))) < 3) {
@@ -86,7 +141,7 @@
 
     if (sum(!is.na(match(colnames(params),
                          c("Steps.of.scaling",
-                           "Length.of.plots")))) < 2 & type == "Transect")
+                           "Length.of.plots")))) < 2 && type == "Transect")
       stop("paramater data must have Steps.of.scaling and Length.of.plots")
 
     params <- params[, which(!is.na(
@@ -137,11 +192,6 @@
         }
 
         indice <- matrix(data_r[down_cond, across_cond])
-
-        # This part makes the formula presense absence
-        # For Shannon I need the abundance
-        ##temp_2[, posit] <- row.names(temp_2) %in%
-        ##  data[data[["index"]] %in% as.vector(indice), "Species"]
 
         temp_2[, posit] <-
           table(data[data[["index"]] %in% as.vector(indice), "Species"])
@@ -225,7 +275,7 @@
     # Calculate Shannon diversity
     results[["H"]][step, ] <- vegan::diversity((temp_2), "shannon", MARGIN = 2)
 
-    for (q in 1:dim(temp_2)[1]) {
+    for (q in seq_len(dim(temp_2)[1])) {
 
       # Prepare the data for JNP calculations
       prova2_temp <- temp_2[1:q, ]
@@ -243,7 +293,7 @@
 
       # LOCAL ENTROPY AND THE LOCAL DISTINCTIVNESS
       le_rand <- rep(0, nrow(prova2_temp[, ]))
-      for (i in 1:dim(prova2_temp)[1]) {
+      for (i in seq_len(dim(prova2_temp)[1])) {
 
         le_rand[i] <- (ncol(prova2_temp[, ]) *
                          log2(ncol(prova2_temp)) -
@@ -262,7 +312,7 @@
       if (!is.null(unique_comb)) {
         freq <- rep(0, ncol(unique_comb))
 
-        for (z in 1:dim(unique_comb)[2]) {
+        for (z in seq_len(dim(unique_comb)[2])) {
           a <- unique_comb[, z]
           hascol <- function(prova2_temp, a) {
             colSums(a == prova2_temp) == nrow(prova2_temp)
@@ -291,7 +341,6 @@
     }
   }
   return(results)
-  #return(temp_2)
 }
 
 .reflector <- function(data = data, control = NULL) {
@@ -305,10 +354,10 @@
     fliprow <- sample(c("TRUE", "FALSE"), 1)
     flipcol <- sample(c("TRUE", "FALSE"), 1)
     if (fliprow == TRUE) {
-      data <- matrix(data[dim(data)[1]:1, ], ncol = dim(data)[2])
+      data <- matrix(data[seq_len(dim(data)[1]):1, ], ncol = dim(data)[2])
     }
     if (flipcol == TRUE) {
-      data <- matrix(data[, dim(data)[2]:1], ncol = dim(data)[2])
+      data <- matrix(data[, seq_len(dim(data)[2]):1], ncol = dim(data)[2])
     }
   }
   if (is.null(control) == FALSE) {
@@ -316,14 +365,18 @@
       data <- data
     }
     if (control == "colz") {
-      data <- matrix(data[, dim(data)[2]:1], ncol = dim(data)[2])
+      data <- matrix(data[, seq_len(dim(data)[2]):1],
+                     ncol = seq_len(dim(data)[2]))
     }
     if (control == "rowz") {
-      data <- matrix(data[dim(data)[1]:1, ], ncol = dim(data)[2])
+      data <- matrix(data[seq_len(dim(data)[1]):1, ],
+                     ncol = seq_len(dim(data)[2]))
     }
     if (control == "colz&rowz") {
-      data <- matrix(data[, dim(data)[2]:1], ncol = dim(data)[2])
-      data <- matrix(data[dim(data)[1]:1, ], ncol = dim(data)[2])
+      data <- matrix(data[, seq_len(dim(data)[2]):1],
+                     ncol = seq_len(dim(data)[2]))
+      data <- matrix(data[seq_len(dim(data)[1]):1, ],
+                     ncol = seq_len(dim(data)[2]))
     }
   }
   return(data)
@@ -342,26 +395,26 @@
       data <- data
     } #No reflection
     if (nr_rotations == 2) {
-      data <- t(data)[, dim(data)[2]:1]
+      data <- t(data)[, seq_len(dim(data)[2]):1]
     } #90 degrees
     if (nr_rotations == 3) {
-      data <- data[dim(data)[1]:1, dim(data)[2]:1]
+      data <- data[seq_len(dim(data)[1]):1, seq_len(dim(data)[2]):1]
     } #180 degrees
     if (nr_rotations == 4) {
-      data <- t(data)[dim(data)[2]:1, ]
+      data <- t(data)[seq_len(dim(data)[2]):1, ]
     } #270 degrees
   } else {
     if (control == 1) {
       data <- data
     } #No reflection
     if (control == 2) {
-      data <- t(data)[, dim(data)[2]:1]
+      data <- t(data)[, seq_len(dim(data)[2]):1]
     } #90 degrees
     if (control == 3) {
-      data <- data[dim(data)[1]:1, dim(data)[2]:1]
+      data <- data[seq_len(dim(data)[1]):1, seq_len(dim(data)[2]):1]
     } #180 degrees
     if (control == 4) {
-      data <- t(data)[dim(data)[2]:1, ]
+      data <- t(data)[seq_len(dim(data)[2]):1, ]
     } #270 degrees
   }
   return(data)
@@ -373,7 +426,8 @@
   # The function performs complete randomization of all species
   # See the package vignette for description.
 
-  out <- temp_index[sample(1:dim(temp_index)[1]), sample(1:dim(temp_index)[2])]
+  out <- temp_index[sample(1:seq_len(dim(temp_index)[1])),
+                    sample(1:seq_len(dim(temp_index)[2]))]
   return(out)
 }
 
@@ -613,8 +667,8 @@
   params <- data[[2]]
   data <- data[[1]]
 
-  # Separate checkof the randomization_type argument
-  if (is.null(randomization_type) |
+  # Separate check of the randomization_type argument
+  if (is.null(randomization_type) ||
       is.na(match(randomization_type, c("RS", "CSR"))))
     stop("randomization must be one of CSR or RS")
 
@@ -688,7 +742,7 @@
 
   # Total SU length needs to be adjusted if grid
   dim_su <- dim_max
-  if( (type == "Grid")) dim_su <- dim_max ^ 2
+  if ((type == "Grid")) dim_su <- dim_max ^ 2
 
   # Create a list object to fill with the new parameters
   results <- list("CD" = cd_rand, "NRC" = nrc_rand, "AS" = cd_rand,
@@ -729,17 +783,6 @@
                     results, type)
 
   } # end transect
-
-  ##############################################################################
-  ##############################################################################
-  # Preparing output data
-
-  #if ("AS" %in% measures) {
-  #  measures <- c(measures, "AS_REL")
-  #}
-
-  #results_final <- results[names(results) %in% measures]
-  #return(results_final)
   return(results)
 }
 
@@ -850,11 +893,9 @@ comspat <- function(data = NULL, params = NULL, dim_max = NULL, type = NULL,
                     measures = NULL, randomization_type = NULL,
                     iterations = 999, alpha = NULL) {
 
-  if (is.null(measures) == TRUE) measures <- c("CD", "NRC")
-  if (!is.null(randomization_type) &
-      sum(!is.na(match(randomization_type, c("CSR", "RS")))) < 1) {
-    stop("randomization_type must be CSR or RS")
-  }
+  measures <- .measures_check
+
+
 
   if (is.null(randomization_type) == TRUE) {
     return(.comspat_orig(data, params, dim_max, type, measures))

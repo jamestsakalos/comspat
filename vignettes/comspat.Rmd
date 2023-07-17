@@ -1,12 +1,12 @@
 ---
-title: "Guidelines for the *comspat* package"
+title: "Getting started with 'comspat'"
 author: "James Tsakalos (james.tsakalos@gmail.com), Stefano Chelli, Giandiego Campetella, Roberto Canullo, Enrico Simonetti, Sandor Bartha"
 date: "04.03.2022"
 output:
   rmarkdown::html_vignette:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{comspat}
+  %\VignetteIndexEntry{Getting started with 'comspat'}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -16,11 +16,21 @@ vignette: >
 body {
 text-align: justify}
 </style>
+<style>
+p.caption {
+  font-size: 0.9em;
+  font-style: normal;
+  color: grey;
+  margin-right: 10%;
+  margin-left: 10%;  
+  text-align: justify;
+}
+</style>
 ```
 
 ------------------------------------------------------------------------
 
-```{r, include = FALSE}
+```{r knitr-setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -39,7 +49,7 @@ The raw data (x) accepted by all functions in the package is a matrix (x) codify
 
 ![**Fig. S1**. Crosswalk between Grid and Transect sample designs and the accepted data formats.](S2_grid_to_data.jpg){width="4.5393701in"}
 
-```{r}
+```{r view-data}
 # Lets have a look at the first few lines and structure of the example data sets
 
 # View the grid data set
@@ -72,7 +82,7 @@ We provide two transects with real data sampled in open sand grassland in Hungar
 | tran_grass_t              | Transect | 500 ⨯1  | 6   | --                                                                                                                            | Bartha et al. (2008)                 |
 +---------------------------+----------+---------+-----+-------------------------------------------------------------------------------------------------------------------------------+--------------------------------------+
 
-```{r, fig.width = 7.1, fig.cap="**Fig. S2**. Spatial distribution of the patchy associated, patchy no interspecific association and completely random (i.e. the grid patchy_associated, grid_patchy_n_isc and grid_mixed_random, resp.) data sets."}
+```{r view-hypothetical-communities, fig.width = 7.1, fig.cap="**Fig. S2**. Spatial distribution of the patchy associated, patchy no interspecific association and completely random (i.e. the grid patchy_associated, grid_patchy_n_isc and grid_mixed_random, resp.) data sets."}
 # View the species spatial distributions
 
 # Store user default parameter arguments to reset on exit
@@ -129,12 +139,12 @@ legend("topleft", as.expression(bquote(bold("B"))),
 
 These steps show how to visualize the species frequency of occurrence within the grid data sets.
 
-```{r, fig.width = 7.1, fig.cap="**Fig. S3**. Frequency distribution of species in the patchy associated, patchy no interspecific association and patchy random (i.e. the grid_patchy_associated, grid_patchy_n_isc and grid_mixed_random, resp.) data sets. Note that species abundance relationships are identical in the three example grids and only their spatial patterns are different."}
+```{r view-frequency-distribution, fig.width = 7.1, fig.cap="**Fig. S3**. Frequency distribution of species in the patchy associated, patchy no interspecific association and patchy random (i.e. the grid_patchy_associated, grid_patchy_n_isc and grid_mixed_random, resp.) data sets. Note that species abundance relationships are identical in the three example grids and only their spatial patterns are different."}
 # View the species frequency of occurrence
 
 # Set plot parameters
 par(mar = c(4, 5, 2, 1), cex = 0.8, mfrow = c(1, 3))
-colvec <- c("lightgoldenrod", "sienna1", "mediumspringgreen", 
+colvec <- c("lightgoldenrod", "sienna1", "mediumspringgreen",
             "forestgreen", "red4", "blue")
 
 # Plot the patchy associated data frame
@@ -155,9 +165,9 @@ mtext("Species frequency", side = 2, line = 3.5, cex = 0.8, font = 2)
 box(which = "plot", lwd = 2)
 ```
 
-Now that we have demonstrated that the grid data sets all feature the same species abundance distributions we might also like to look at how the distributions of species combinations vary between the grids. To achieve this goal we have defined a helper function. Please see the `'freq_comb'` function and documentation.
+Now that we have demonstrated that the grid data sets all feature the same species abundance distributions we might also like to look at how the distributions of species combinations vary between the grids. To achieve this goal we have defined a helper function. Please see the `freq_comb()` function and documentation.
 
-```{r, fig.width = 7.1, fig.cap="**Fig. S4**. Barplot demonstrating the differences of the frequency distribution of species combinations among the contrasting types of patterns represented by the grid data sets. Each bar represents a specific species combination occurring within the smallest sample unit size."}
+```{r view-frequency-combinations, fig.width = 7.1, fig.cap="**Fig. S4**. Barplot demonstrating the differences of the frequency distribution of species combinations among the contrasting types of patterns represented by the grid data sets. Each bar represents a specific species combination occurring within the smallest sample unit size."}
 # Plot the distribution of species combinations
 
 # Get the species frequency at the Primary Sampling unit Scale
@@ -175,16 +185,17 @@ c$dat <- "random"
 a <- rbind(a, b, c)
 
 # Reshape the data
-data_base <- reshape(a, idvar = "dat", timevar = "combinations", 
+data_base <- reshape(a, idvar = "dat", timevar = "combinations",
                      direction = "wide")
 data_base[is.na(data_base)] <- 0
 row.names(data_base) <- data_base$dat
 data_base$dat <- NULL
 data_base <- as.matrix(data_base)
-colnames(data_base) <- gsub(pattern = "Freq.", replacement = "", 
+colnames(data_base) <- gsub(pattern = "Freq.", replacement = "",
                             colnames(data_base))
 
-# Create the barplot (note that we are using log transformation so was can better view the different combinations)
+# Create the barplot (note that we are using log transformation so was can
+# better view the different combinations)
 par(mar = c(8, 4, 1, 1))
 barplot(height = log1p(data_base), beside = TRUE, cex.names = 0.7,
         las = 2, col = c("red", "blue", "green"))
@@ -199,7 +210,7 @@ box(lwd = 2)
 
 These steps show how to visualize the species spatial distributions within the transect data sets.
 
-```{r, fig.width = 7.1, fig.cap="**Fig. S5**. Spatial distribution of the species and plant functional types along the length of the transect data sets."}
+```{r view-transect-patterns, fig.width = 7.1, fig.cap="**Fig. S5**. Spatial distribution of the species and plant functional types along the length of the transect data sets."}
 # View the species spatial distributions
 
 # Set plot parameters
@@ -207,10 +218,10 @@ par(mar = c(8, 3, 2, 1), mfrow = c(1, 2), cex = 0.8)
 
 # Plots the transect plant functional type data frame
 plot(as.numeric(tran_grass_s$Species) ~ as.numeric(tran_grass_s$X),
-     xaxt = 'n', yaxt = 'n', ann = FALSE, xlim = c(0,500),
+     xaxt = "n", yaxt = "n", ann = FALSE, xlim = c(0, 500),
      pch = c(3, 4, 15:22)[tran_grass_s$Species],
-     col=c("red","blue","green","pink","orange","black",
-           "red","blue","green","pink")[tran_grass_s$Species])
+     col = c("red", "blue", "green", "pink", "orange", "black",
+           "red", "blue", "green", "pink")[tran_grass_s$Species])
 axis(1, at = c(0, 500), labels = c(0, 500))
 mtext("Species", side = 2, line = 1.5, font = 2, cex = 0.8)
 mtext("Plant presences in 5x5cm units", side = 1, line = 1, font = 2, cex = 0.8)
@@ -218,16 +229,20 @@ box(which = "plot", lwd = 2)
 
 legend(x = 20, y = -2.3, legend = c(levels(tran_grass_s$Species)),
        pch = c(3, 4, 15:22),
-       col = c("red","blue","green","pink","orange","black",
-           "red","blue","green","pink"),
+       col = c("red", "blue", "green", "pink", "orange", "black",
+           "red", "blue", "green", "pink"),
        ncol = 2, cex = 0.8,
        xpd = TRUE)
 
 # Plots the transect plant functional type data frame
-plot(as.numeric(tran_grass_t$Species) ~ as.numeric(tran_grass_t$X),
-     xaxt = 'n', yaxt = 'n', ann = FALSE, xlim = c(0,500),
+plot(
+  as.numeric(tran_grass_t$Species) ~ as.numeric(tran_grass_t$X),
+     xaxt = "n", yaxt = "n", ann = FALSE, xlim = c(0, 500),
      pch = c(3, 4, 15:18)[tran_grass_t$Species],
-     col = c("red", "blue", "green", "pink", "orange", "black")[tran_grass_t$Species])
+     col = c(
+       "red", "blue", "green", "pink", "orange", "black"
+     )[tran_grass_t$Species]
+)
 axis(1, at = c(0, 500), labels = c(0, 500))
 mtext("Plant functional types", side = 2, line = 1.5, font = 2, cex = 0.8)
 mtext("PFT presences in 5x5cm units", side = 1, line = 1, font = 2, cex = 0.8)
@@ -242,7 +257,7 @@ legend(x = 50, y = -1.2, legend = c(levels(tran_grass_t$Species)),
 
 These steps show how to visualize the species frequency of occurrence within the transect data sets.
 
-```{r, fig.width = 7.1, fig.cap="**Fig. S6**. Frequency distribution of the species and plant functional types (PFT)  within the transect data sets."}
+```{r view-transect-combinations, fig.width = 7.1, fig.cap="**Fig. S6**. Frequency distribution of the species and plant functional types (PFT)  within the transect data sets."}
 # View the species frequency of occurrence
 
 # Set plot parameters
@@ -261,23 +276,23 @@ box(which = "plot", lwd = 2)
 
 ### Step 2. Preparing the parameter data set
 
-The `'comspat'` function performs computerized sampling (called secondary sampling) from the primary (grid or transect) data. During secondary sampling users can change the sampling grain (by merging adjacent sampling units into larger ones. To control the secondary sampling procedure, the user must specify several sampling parameters. The secondary sampling parameters are supplied to the params argument as a data frame. The parameter data frame stores the secondary sampling parameters as a series of steps stored as rows. The parameter data frame also contains columns which specify the length and height of the secondary sampling units. The units supplied to the length and height columns must correspond to the number of primary sampling units in each dimension. The height dimension is not required where sampling was conducted as a transect. We have used Wensel's (1975) method within our package, where incomplete sampling units are complemented by fragments taken from the opposite edge of the mapped grid. While we highly recommend following the guideline sequentially if you would like to visualize this secondary sampling routine please inspect our gif animations embedded as **Fig. S10**. Please note that these will appear as static images in pdf format.
+The `comspat()` function performs computerized sampling (called secondary sampling) from the primary (grid or transect) data. During secondary sampling users can change the sampling grain (by merging adjacent sampling units into larger ones. To control the secondary sampling procedure, the user must specify several sampling parameters. The secondary sampling parameters are supplied to the params argument as a data frame. The parameter data frame stores the secondary sampling parameters as a series of steps stored as rows. The parameter data frame also contains columns which specify the length and height of the secondary sampling units. The units supplied to the length and height columns must correspond to the number of primary sampling units in each dimension. The height dimension is not required where sampling was conducted as a transect. We have used Wensel's (1975) method within our package, where incomplete sampling units are complemented by fragments taken from the opposite edge of the mapped grid. While we highly recommend following the guideline sequentially if you would like to visualize this secondary sampling routine please inspect our gif animations embedded as **Fig. S10**. Please note that these will appear as static images in pdf format.
 
 We recommended that the size of the secondary sampling units follow a logarithmic spatial scale during the first approximation of the functions (**Fig. S8**). In this manner, exponential enlargement of the secondary sampling units is achieved. The largest secondary sampling unit should be less than a quarter of the total sampling area to reduce the edge effect. The ultimate selection of secondary sampling units should consider the distribution of maxima functions. After having the first results, the estimates can be improved by modifying of the secondary sampling (using more or different sampling unit sizes).
 
-```{r, fig.cap="**Fig. S7**. Example of spatial scaling using exponentially increaseing of in secondary sampling unit sizes."}
+```{r view-spatial-scaling, fig.cap="**Fig. S7**. Example of spatial scaling using exponentially increaseing of in secondary sampling unit sizes."}
 # Load and visualize the parameter data set
 data("param_grid")
 
 # The sample unit size of our simulated data was 5 cm x 5 cm
-su_area <- param_grid[,2] * param_grid[,3] * (0.05 * 0.05)
+su_area <- param_grid[, 2] * param_grid[, 3] * (0.05 * 0.05)
 
 # Plot the area
 par(mar = c(4.5, 4.5, 0.5, 0.5), ps = 12)
-plot(su_area ~ c(1:16), type = 'b', pch = 19, las = 2,
-     ylab = "Sample Unit Area", 
+plot(su_area ~ c(1:16), type = "b", pch = 19, las = 2,
+     ylab = "Sample Unit Area",
      xlab = "Steps of Scaling")
-mtext(text = expression('(cm'^2*')'),
+mtext(text = expression("(cm'^2 *')"),
       side = 2, line = 1.9, cex = 0.6)
 
 ```
@@ -304,13 +319,13 @@ While a picture paints a thousand words, perhaps an animation of the secondary s
 
 ### Step 5. comspat without null models.
 
-The `'comspat'` function allows users to calculate Information Theory models with and without null models. Analysis without the use of null models is a useful feature during the data exploration phase. It is useful because it allows users to optimize their parameter data set and to visually assess the data without the requirement of parallel computing (initiated when null models are generated) and waiting for potentially time-intensive calculations to complete. Here we demonstrate how the `'comspat_plot'` function can be used to prepare a graphical output. Because the plotting function was created using R's base plotting code it is compatible with several common plotting functions (including `'par'`).
+The `comspat()` function allows users to calculate Information Theory models with and without null models. Analysis without the use of null models is a useful feature during the data exploration phase. It is useful because it allows users to optimize their parameter data set and to visually assess the data without the requirement of parallel computing (initiated when null models are generated) and waiting for potentially time-intensive calculations to complete. Here we demonstrate how the `comspat_plot()` function can be used to prepare a graphical output. Because the plotting function was created using R's base plotting code it is compatible with several common plotting functions (including `par()`).
 
-```{r, echo=FALSE}
+```{r load-ms-data, echo  =FALSE}
 load("ms_results.rdata")
 ```
 
-```{r, eval=FALSE, echo=TRUE, fig.width = 7.1, fig.cap="**Fig. S12**. Number of realized combinatons and compositional diversity of the three simulated grid data sets. Red, blue and green represent the grid.random, grid.patchy.n.ISC and grid.patchy.associated data sets."}
+```{r create-ms-figures, eval=FALSE, echo=TRUE, fig.width = 7.1, fig.cap="**Fig. S12**. Number of realized combinatons and compositional diversity of the three simulated grid data sets. Red, blue and green represent the grid.random, grid.patchy.n.ISC and grid.patchy.associated data sets."}
 # Calculate the NRC and CD for the grid data sets.
 g_r <- comspat(data = grid_random, params = param_grid,
                dim_max = 64, type = "Grid")
@@ -329,12 +344,12 @@ comspat_plot(data = data, params = param_grid, type = "Grid", measure = "CD",
              su_size = 0.01, ymin = 0, ymax = 5.5, xmax = 1, p_col = p_col)
 
 # Hint, try changing the measure argument to "NRC"
-comspat_plot(data = data, params = param_grid, type = "Grid", measure = "NRC", 
+comspat_plot(data = data, params = param_grid, type = "Grid", measure = "NRC",
              su_size = 0.01, ymin = 0, ymax = 65, xmax = 1, p_col = p_col)
 
 ```
 
-```{r, eval=TRUE, echo=FALSE, fig.width = 7.1, fig.cap="**Fig. S11**. Number of realised combinatons and compositional diversity of the three simulated grid data sets. Red, blue and green represent the grid_random, grid_patchy_n_isc and grid_patchy_associated data sets."}
+```{r perform-randomizations, eval=TRUE, echo=FALSE, fig.width = 7.1, fig.cap="**Fig. S11**. Number of realised combinatons and compositional diversity of the three simulated grid data sets. Red, blue and green represent the grid_random, grid_patchy_n_isc and grid_patchy_associated data sets."}
 
 # Calculate the NRC and CD for the grid data sets.
 #g_r <- comspat(data = grid_random, params = param_grid,
@@ -358,7 +373,7 @@ comspat_plot(data = data, params = param_grid, type = "Grid", measure = "CD",
 mtext("CD", side = 2, line = 2, font = 2)
 
 # Hint, try changing the measure argument to "NRC"
-comspat_plot(data = data, params = param_grid, type = "Grid", measure = "NRC", 
+comspat_plot(data = data, params = param_grid, type = "Grid", measure = "NRC",
              su_size = 0.01, ymin = 0, ymax = 65, xmax = 10, p_col = p_col)
 mtext("NRC", side = 2, line = 2, font = 2)
 
@@ -386,9 +401,9 @@ Here is a diagram of several shifts on a 4 ⨯ 4 grid. The position (1,1) repres
 
 ### Case Study 1: Simulated grid data
 
-This section reproduces the analyses of the grid data sets presented in Figure 1 (Tsakalos et al. 2022). It demonstrates how to use the `'comspat'` function with null models on grid data. It also demonstrates how the `'comspat_plot'` function can be used in combination with R's base plotting system to create complex graphical outputs.
+This section reproduces the analyses of the grid data sets presented in Figure 1 (Tsakalos et al. 2022). It demonstrates how to use the `comspat()` function with null models on grid data. It also demonstrates how the `comspat_plot()` function can be used in combination with R's base plotting system to create complex graphical outputs.
 
-```{r, eval=FALSE, echo=TRUE, fig.width = 7.1, fig.cap="**Fig. S16**. Mapped patterns, number (number of realised combinations; NRC) and diversity (compositional diversity; CD) of species combinations in simulated grid data sets along increasing sample unit lengths. Grid data sets presented in the figure include: ‘random' (A, D, G), 'random patchy' (B, E, H) and 'patchy associated' (C, F, I). The black line represents the observed value. The blue line and red lines represent the 95% confidence intervals generated by the complete spatial randomization and random shift null models using 999 randomizations."}
+```{r plot-randomizations, eval=FALSE, echo=TRUE, fig.width = 7.1, fig.cap="**Fig. S16**. Mapped patterns, number (number of realised combinations; NRC) and diversity (compositional diversity; CD) of species combinations in simulated grid data sets along increasing sample unit lengths. Grid data sets presented in the figure include: ‘random' (A, D, G), 'random patchy' (B, E, H) and 'patchy associated' (C, F, I). The black line represents the observed value. The blue line and red lines represent the 95% confidence intervals generated by the complete spatial randomization and random shift null models using 999 randomizations."}
 # Case study 1: Simulated grid data sets
 
 # Calculate NRC and CD
@@ -397,7 +412,7 @@ This section reproduces the analyses of the grid data sets presented in Figure 1
 rand_csr <- comspat(data = grid_random, params = param_grid, dim_max = 64,
                     type = "Grid", randomization_type = "CSR", iterations = 999)
 rand_rs <- comspat(data = grid_random, params = param_grid, dim_max = 64,
-                   type="Grid", randomization_type = "RS", iterations = 999)
+                   type = "Grid", randomization_type = "RS", iterations = 999)
 
 patch_csr <- comspat(data = grid_patchy_n_isc, params = param_grid,
                      dim_max = 64, type = "Grid", randomization_type = "CSR",
@@ -414,8 +429,8 @@ assoc_rs <- comspat(data = grid_patchy_associated, params = param_grid,
                     iterations = 999)
 
 # Set plot parameters
-colA <- sample(
-  c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02"),6)
+col_a <- sample(
+  c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02"), 6)
 par(mfrow = c(3, 3), mar = c(0, 0, 0, 0), oma = c(5, 5, 0.5, 0.5),
     mgp = c(2, 1, 0), tcl = -0.5)
 
@@ -428,31 +443,31 @@ plot(y = grid_patchy_associated$Y, x = grid_patchy_associated$X,
      xlab = "", ylab = "", xaxt = "none", yaxt = "none", cex = 0)
 points(y = grid_patchy_associated$Y, x = grid_patchy_associated$X,
        pch = c(22, 17, 18, 2, 20, 18)[grid_patchy_associated$Species],
-       col = colA[grid_patchy_associated$Species],
+       col = col_a[grid_patchy_associated$Species],
        bg = c("yellow2")[grid_patchy_associated[grid_patchy_associated[, 3]
                                                == "Sp1", "Species"]],
        cex = c(0.8, 0.8, 0.8, 0.6, 0.8, 1)[grid_patchy_associated$Species],
        lwd = 2)
-text(x = 3,y = 62, "A", font = 2, cex = 1)
+text(x = 3, y = 62, "A", font = 2, cex = 1)
 
 # Plot the patchy random data frame
 plot(y = grid_patchy_n_isc$Y, x = grid_patchy_n_isc$X,
      xlab = "", ylab = "", xaxt = "none", yaxt = "none", cex = 0)
 points(y = grid_patchy_n_isc$Y, x = grid_patchy_n_isc$X,
        pch = c(22, 17, 18, 2, 20, 18)[grid_patchy_n_isc$Species],
-       col = colA[grid_patchy_n_isc$Species],
+       col = col_a[grid_patchy_n_isc$Species],
        bg = c("yellow2")[grid_patchy_n_isc[grid_patchy_n_isc[, 3]
                                            == "Sp1", "Species"]],
        cex = c(0.8, 0.8, 0.8, 0.6, 0.8, 1)[grid_patchy_n_isc$Species],
        lwd = 2)
-text(x = 3, y = 62,"B", font = 2, cex = 1)
+text(x = 3, y = 62, "B", font = 2, cex = 1)
 
 # Plot the mixed random data frame
 plot(y = grid_random$Y, x = grid_random$X,
      xlab = "", ylab = "", xaxt = "none", yaxt = "none", cex = 0)
 points(y = grid_random$Y, x = grid_random$X,
        pch = c(22, 17, 18, 2, 20, 18)[grid_random$Species],
-       col = colA[grid_random$Species],
+       col = col_a[grid_random$Species],
        bg = c("yellow2")[grid_random[grid_random[, 3] == "Sp1", "Species"]],
        cex = c(0.8, 0.8, 0.8, 0.6, 0.8, 1)[grid_random$Species],
        lwd = 2)
@@ -463,7 +478,7 @@ text(x = 3, y = 62, "C", font = 2, cex = 1)
 
 # Part 2: the NRC plots with 95% CI
 
-p_col = list("blue","red")
+p_col <- list("blue", "red")
 
 # Plot the mixed random data frame
 data <- list("CSR" = assoc_csr[[2]], "RS" = assoc_rs[[2]])
@@ -477,10 +492,10 @@ axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
      labels = FALSE, cex.axis = 0.75, tck = 0.015)
 axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2),
      labels = FALSE, cex.axis = 0.75, tck = 0.025)
-text(x = 0.0125, y = 63,"D", font = 2, cex = 1)
+text(x = 0.0125, y = 63, "D", font = 2, cex = 1)
 
 # Plot the patchy random data frame
-data <- list("CSR" = patch_csr[[2]],"Random Shift" = patch_rs[[2]])
+data <- list("CSR" = patch_csr[[2]], "Random Shift" = patch_rs[[2]])
 
 comspat_plot(data = data, params = param_grid, type = "Grid", measure = "NRC",
              su_size = 0.01, ymin = 0, ymax = 65, xmin = 0.01, xmax = 10,
@@ -492,7 +507,7 @@ axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2),
      labels = FALSE, cex.axis = 0.75, tck = 0.025)
 axis(2, at = round(seq(0, 60, 10)),
      labels = FALSE, cex.axis = 0.75, tck = 0.015)
-text(x = 0.0125, y = 63,"E", font = 2, cex = 1)
+text(x = 0.0125, y = 63, "E", font = 2, cex = 1)
 
 # Plot the patchy associated data frame
 data <- list("CSR" = rand_csr[[2]], "Random Shift" = rand_rs[[2]])
@@ -507,153 +522,7 @@ axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2),
      labels = FALSE, cex.axis = 0.75, tck = 0.025)
 axis(2, at = round(seq(0, 60, 10)),
      labels = FALSE, cex.axis = 0.75, tck = 0.015)
-text(x = 0.0125,y = 63,"F", font = 2, cex = 1)
-
-# Part 3: the CD plots with 95% CI
-
-# Plot the mixed random data frame
-data <- list("CSR" = assoc_csr[[2]], "Random Shift" = assoc_rs[[2]])
-
-comspat_plot(data = data, params = param_grid, type = "Grid", measure = "CD",
-             su_size = 0.01, ymin = 0, ymax = 5.5, xmin = 0.01, xmax = 10,
-             xaxt = FALSE, yaxt = TRUE, p_col = p_col, stats_output = TRUE)
-mtext("CD", side = 2, line = 3, font = 2)
-axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
-     labels = FALSE, cex.axis = 0.75, tck = -0.015)
-axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2),
-     labels = FALSE, cex.axis = 0.75, tck = -0.025)
-text(x = 0.0125, y = 5.3, "G", font = 2, cex = 1)
-
-# Plot the patchy random data frame
-data<-list("CSR" = patch_csr[[2]], "Random Shift" = patch_rs[[2]])
-
-comspat_plot(data = data, params = param_grid, type = "Grid", measure = "CD",
-             su_size = 0.01, ymin = 0, ymax = 5.5, xmin = 0.01, xmax = 10,
-             xaxt = FALSE, yaxt = FALSE, p_col = p_col, stats_output = TRUE)
-
-mtext("Length of sampling units (m)", side = 1, line = 3, font =2)
-axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
-     labels = FALSE, cex.axis = 0.75, tck = -0.015)
-axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2),
-     labels = FALSE, cex.axis = 0.75, tck = -0.025)
-axis(2, at = round(seq(0, 5, 1)), labels = FALSE, cex.axis = 0.75, tck = 0.015)
-text(x = 0.0125, y = 5.3,"H", font = 2, cex = 1)
-
-# Plot the patchy associated data frame
-data <- list("CSR" = rand_csr[[2]],"Random Shift" = rand_rs[[2]])
-comspat_plot(data = data, params = param_grid, type = "Grid", measure = "CD",
-             su_size = 0.01, ymin = 0, ymax = 5.5, xmin = 0.01, xmax = 10,
-             xaxt = FALSE, yaxt = FALSE, p_col = p_col, stats_output = TRUE)
-axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
-     labels = FALSE, cex.axis = 0.75, tck = -0.015)
-axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2),
-     labels = FALSE, cex.axis = 0.75, tck = -0.025)
-axis(2, at = round(seq(0, 5, 1)), labels = FALSE, cex.axis = 0.75, tck = 0.015)
-text(x = 0.0125, y = 5.3, "I", font = 2, cex = 1)
-```
-
-```{r, eval=TRUE, echo=FALSE, fig.width = 7.1, fig.height = 7.1, fig.cap="**Fig. S15**. Mapped patterns, number (number of realised combinations; NRC) and diversity (compositional diversity; CD) of species combinations in simulated grid data sets along increasing sample unit lengths. Grid data sets presented in the figure include: 'patchy associated' (A, D, G), 'random patchy' (B, E, H) and 'random' (C, F, I). The black line represents the observed value. The blue line and red lines represent the 95% confidence intervals generated by the complete spatial randomization and random shift null models using 999 randomizations."}
-# Case study 1: Simulated grid data sets
-
-#
-# See script block above.
-#
-
-# Set plot parameters
-colA <- sample(
-  c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02"),6)
-par(mfrow = c(3, 3), mar = c(0, 0, 0, 0), oma = c(5, 5, 0.5, 0.5),
-    mgp = c(2, 1, 0), tcl = -0.5)
-
-################################################################################
-
-# Part 1: the spatial distribution
-
-# Plot the patchy associated data frame
-plot(y = grid_patchy_associated$Y, x = grid_patchy_associated$X,
-     xlab = "", ylab = "", xaxt = "none", yaxt = "none", cex = 0)
-points(y = grid_patchy_associated$Y, x = grid_patchy_associated$X,
-       pch = c(22, 17, 18, 2, 20, 18)[grid_patchy_associated$Species],
-       col = colA[grid_patchy_associated$Species],
-       bg = c("yellow2")[grid_patchy_associated[grid_patchy_associated[, 3]
-                                               == "Sp1", "Species"]],
-       cex = c(0.8, 0.8, 0.8, 0.6, 0.8, 1)[grid_patchy_associated$Species],
-       lwd = 2)
-text(x = 3,y = 62, "A", font = 2, cex = 1)
-
-# Plot the patchy random data frame
-plot(y = grid_patchy_n_isc$Y, x = grid_patchy_n_isc$X,
-     xlab = "", ylab = "", xaxt = "none", yaxt = "none", cex = 0)
-points(y = grid_patchy_n_isc$Y, x = grid_patchy_n_isc$X,
-       pch = c(22, 17, 18, 2, 20, 18)[grid_patchy_n_isc$Species],
-       col = colA[grid_patchy_n_isc$Species],
-       bg = c("yellow2")[grid_patchy_n_isc[grid_patchy_n_isc[, 3]
-                                           == "Sp1", "Species"]],
-       cex = c(0.8, 0.8, 0.8, 0.6, 0.8, 1)[grid_patchy_n_isc$Species],
-       lwd = 2)
-text(x = 3, y = 62,"B", font = 2, cex = 1)
-
-# Plot the mixed random data frame
-plot(y = grid_random$Y, x = grid_random$X,
-     xlab = "", ylab = "", xaxt = "none", yaxt = "none", cex = 0)
-points(y = grid_random$Y, x = grid_random$X,
-       pch = c(22, 17, 18, 2, 20, 18)[grid_random$Species],
-       col = colA[grid_random$Species],
-       bg = c("yellow2")[grid_random[grid_random[, 3] == "Sp1", "Species"]],
-       cex = c(0.8, 0.8, 0.8, 0.6, 0.8, 1)[grid_random$Species],
-       lwd = 2)
-text(x = 3, y = 62, "C", font = 2, cex = 1)
-
-
-################################################################################
-
-# Part 2: the NRC plots with 95% CI
-
-p_col = list("blue", "red")
-
-# Plot the mixed random data frame
-data <- list("CSR" = assoc_csr[[2]], "RS" = assoc_rs[[2]])
-
-comspat_plot(data = data, params = param_grid, type = "Grid", measure = "NRC",
-             su_size = 0.01, ymin = 0, ymax = 65, xmin = 0.01, xmax = 10,
-             xaxt = FALSE, yaxt = TRUE, p_col = p_col, stats_output = TRUE)
-mtext("NRC", side = 2, line = 3, font = 2)
-
-axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
-     labels = FALSE, cex.axis = 0.75, tck = 0.015)
-axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2),
-     labels = FALSE, cex.axis = 0.75, tck = 0.025)
-text(x = 0.0125, y = 63,"D", font = 2, cex = 1)
-
-# Plot the patchy random data frame
-data <- list("CSR" = patch_csr[[2]],"Random Shift" = patch_rs[[2]])
-
-comspat_plot(data = data, params = param_grid, type = "Grid", measure = "NRC",
-             su_size = 0.01, ymin = 0, ymax = 65, xmin = 0.01, xmax = 10,
-             xaxt = FALSE, yaxt = FALSE, p_col = p_col, stats_output = TRUE)
-
-axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
-     labels = FALSE, cex.axis = 0.75, tck = 0.015)
-axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2),
-     labels = FALSE, cex.axis = 0.75, tck = 0.025)
-axis(2, at = round(seq(0, 60, 10)),
-     labels = FALSE, cex.axis = 0.75, tck = 0.015)
-text(x = 0.0125, y = 63,"E", font = 2, cex = 1)
-
-# Plot the patchy associated data frame
-data <- list("CSR" = rand_csr[[2]], "Random Shift" = rand_rs[[2]])
-
-comspat_plot(data = data, params = param_grid, type = "Grid", measure = "NRC",
-             su_size = 0.01, ymin = 0, ymax = 65, xmin = 0.01, xmax = 10,
-             xaxt = FALSE, yaxt = FALSE, p_col = p_col, stats_output = TRUE)
-
-axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
-     labels = FALSE, cex.axis = 0.75, tck = 0.015)
-axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2),
-     labels = FALSE, cex.axis = 0.75, tck = 0.025)
-axis(2, at = round(seq(0, 60, 10)),
-     labels = FALSE, cex.axis = 0.75, tck = 0.015)
-text(x = 0.0125,y = 63,"F", font = 2, cex = 1)
+text(x = 0.0125, y = 63, "F", font = 2, cex = 1)
 
 # Part 3: the CD plots with 95% CI
 
@@ -677,16 +546,162 @@ comspat_plot(data = data, params = param_grid, type = "Grid", measure = "CD",
              su_size = 0.01, ymin = 0, ymax = 5.5, xmin = 0.01, xmax = 10,
              xaxt = FALSE, yaxt = FALSE, p_col = p_col, stats_output = TRUE)
 
-mtext("Length of sampling units (m)", side = 1, line = 3, font =2)
+mtext("Length of sampling units (m)", side = 1, line = 3, font = 2)
 axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
      labels = FALSE, cex.axis = 0.75, tck = -0.015)
 axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2),
      labels = FALSE, cex.axis = 0.75, tck = -0.025)
 axis(2, at = round(seq(0, 5, 1)), labels = FALSE, cex.axis = 0.75, tck = 0.015)
-text(x = 0.0125, y = 5.3,"H", font = 2, cex = 1)
+text(x = 0.0125, y = 5.3, "H", font = 2, cex = 1)
 
 # Plot the patchy associated data frame
-data <- list("CSR" = rand_csr[[2]],"Random Shift" = rand_rs[[2]])
+data <- list("CSR" = rand_csr[[2]], "Random Shift" = rand_rs[[2]])
+comspat_plot(data = data, params = param_grid, type = "Grid", measure = "CD",
+             su_size = 0.01, ymin = 0, ymax = 5.5, xmin = 0.01, xmax = 10,
+             xaxt = FALSE, yaxt = FALSE, p_col = p_col, stats_output = TRUE)
+axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
+     labels = FALSE, cex.axis = 0.75, tck = -0.015)
+axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2),
+     labels = FALSE, cex.axis = 0.75, tck = -0.025)
+axis(2, at = round(seq(0, 5, 1)), labels = FALSE, cex.axis = 0.75, tck = 0.015)
+text(x = 0.0125, y = 5.3, "I", font = 2, cex = 1)
+```
+
+```{r perform-randomizations-part2, eval=TRUE, echo=FALSE, fig.width = 7.1, fig.height = 7.1, fig.cap="**Fig. S15**. Mapped patterns, number (number of realised combinations; NRC) and diversity (compositional diversity; CD) of species combinations in simulated grid data sets along increasing sample unit lengths. Grid data sets presented in the figure include: 'patchy associated' (A, D, G), 'random patchy' (B, E, H) and 'random' (C, F, I). The black line represents the observed value. The blue line and red lines represent the 95% confidence intervals generated by the complete spatial randomization and random shift null models using 999 randomizations."}
+# Case study 1: Simulated grid data sets
+
+#
+# See script block above.
+#
+
+# Set plot parameters
+col_a <- sample(
+  c("#1b9e77", "#d95f02", "#7570b3", "#e7298a", "#66a61e", "#e6ab02"), 6)
+par(mfrow = c(3, 3), mar = c(0, 0, 0, 0), oma = c(5, 5, 0.5, 0.5),
+    mgp = c(2, 1, 0), tcl = -0.5)
+
+################################################################################
+
+# Part 1: the spatial distribution
+
+# Plot the patchy associated data frame
+plot(y = grid_patchy_associated$Y, x = grid_patchy_associated$X,
+     xlab = "", ylab = "", xaxt = "none", yaxt = "none", cex = 0)
+points(y = grid_patchy_associated$Y, x = grid_patchy_associated$X,
+       pch = c(22, 17, 18, 2, 20, 18)[grid_patchy_associated$Species],
+       col = col_a[grid_patchy_associated$Species],
+       bg = c("yellow2")[grid_patchy_associated[grid_patchy_associated[, 3]
+                                               == "Sp1", "Species"]],
+       cex = c(0.8, 0.8, 0.8, 0.6, 0.8, 1)[grid_patchy_associated$Species],
+       lwd = 2)
+text(x = 3, y = 62, "A", font = 2, cex = 1)
+
+# Plot the patchy random data frame
+plot(y = grid_patchy_n_isc$Y, x = grid_patchy_n_isc$X,
+     xlab = "", ylab = "", xaxt = "none", yaxt = "none", cex = 0)
+points(y = grid_patchy_n_isc$Y, x = grid_patchy_n_isc$X,
+       pch = c(22, 17, 18, 2, 20, 18)[grid_patchy_n_isc$Species],
+       col = col_a[grid_patchy_n_isc$Species],
+       bg = c("yellow2")[grid_patchy_n_isc[grid_patchy_n_isc[, 3]
+                                           == "Sp1", "Species"]],
+       cex = c(0.8, 0.8, 0.8, 0.6, 0.8, 1)[grid_patchy_n_isc$Species],
+       lwd = 2)
+text(x = 3, y = 62, "B", font = 2, cex = 1)
+
+# Plot the mixed random data frame
+plot(y = grid_random$Y, x = grid_random$X,
+     xlab = "", ylab = "", xaxt = "none", yaxt = "none", cex = 0)
+points(y = grid_random$Y, x = grid_random$X,
+       pch = c(22, 17, 18, 2, 20, 18)[grid_random$Species],
+       col = col_a[grid_random$Species],
+       bg = c("yellow2")[grid_random[grid_random[, 3] == "Sp1", "Species"]],
+       cex = c(0.8, 0.8, 0.8, 0.6, 0.8, 1)[grid_random$Species],
+       lwd = 2)
+text(x = 3, y = 62, "C", font = 2, cex = 1)
+
+
+################################################################################
+
+# Part 2: the NRC plots with 95% CI
+
+p_col <- list("blue", "red")
+
+# Plot the mixed random data frame
+data <- list("CSR" = assoc_csr[[2]], "RS" = assoc_rs[[2]])
+
+comspat_plot(data = data, params = param_grid, type = "Grid", measure = "NRC",
+             su_size = 0.01, ymin = 0, ymax = 65, xmin = 0.01, xmax = 10,
+             xaxt = FALSE, yaxt = TRUE, p_col = p_col, stats_output = TRUE)
+mtext("NRC", side = 2, line = 3, font = 2)
+
+axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
+     labels = FALSE, cex.axis = 0.75, tck = 0.015)
+axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2),
+     labels = FALSE, cex.axis = 0.75, tck = 0.025)
+text(x = 0.0125, y = 63, "D", font = 2, cex = 1)
+
+# Plot the patchy random data frame
+data <- list("CSR" = patch_csr[[2]], "Random Shift" = patch_rs[[2]])
+
+comspat_plot(data = data, params = param_grid, type = "Grid", measure = "NRC",
+             su_size = 0.01, ymin = 0, ymax = 65, xmin = 0.01, xmax = 10,
+             xaxt = FALSE, yaxt = FALSE, p_col = p_col, stats_output = TRUE)
+
+axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
+     labels = FALSE, cex.axis = 0.75, tck = 0.015)
+axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2),
+     labels = FALSE, cex.axis = 0.75, tck = 0.025)
+axis(2, at = round(seq(0, 60, 10)),
+     labels = FALSE, cex.axis = 0.75, tck = 0.015)
+text(x = 0.0125, y = 63, "E", font = 2, cex = 1)
+
+# Plot the patchy associated data frame
+data <- list("CSR" = rand_csr[[2]], "Random Shift" = rand_rs[[2]])
+
+comspat_plot(data = data, params = param_grid, type = "Grid", measure = "NRC",
+             su_size = 0.01, ymin = 0, ymax = 65, xmin = 0.01, xmax = 10,
+             xaxt = FALSE, yaxt = FALSE, p_col = p_col, stats_output = TRUE)
+
+axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
+     labels = FALSE, cex.axis = 0.75, tck = 0.015)
+axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2),
+     labels = FALSE, cex.axis = 0.75, tck = 0.025)
+axis(2, at = round(seq(0, 60, 10)),
+     labels = FALSE, cex.axis = 0.75, tck = 0.015)
+text(x = 0.0125, y = 63, "F", font = 2, cex = 1)
+
+# Part 3: the CD plots with 95% CI
+
+# Plot the mixed random data frame
+data <- list("CSR" = assoc_csr[[2]], "Random Shift" = assoc_rs[[2]])
+
+comspat_plot(data = data, params = param_grid, type = "Grid", measure = "CD",
+             su_size = 0.01, ymin = 0, ymax = 5.5, xmin = 0.01, xmax = 10,
+             xaxt = FALSE, yaxt = TRUE, p_col = p_col, stats_output = TRUE)
+mtext("CD", side = 2, line = 3, font = 2)
+axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
+     labels = FALSE, cex.axis = 0.75, tck = -0.015)
+axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2),
+     labels = FALSE, cex.axis = 0.75, tck = -0.025)
+text(x = 0.0125, y = 5.3, "G", font = 2, cex = 1)
+
+# Plot the patchy random data frame
+data <- list("CSR" = patch_csr[[2]], "Random Shift" = patch_rs[[2]])
+
+comspat_plot(data = data, params = param_grid, type = "Grid", measure = "CD",
+             su_size = 0.01, ymin = 0, ymax = 5.5, xmin = 0.01, xmax = 10,
+             xaxt = FALSE, yaxt = FALSE, p_col = p_col, stats_output = TRUE)
+
+mtext("Length of sampling units (m)", side = 1, line = 3, font = 2)
+axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
+     labels = FALSE, cex.axis = 0.75, tck = -0.015)
+axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2),
+     labels = FALSE, cex.axis = 0.75, tck = -0.025)
+axis(2, at = round(seq(0, 5, 1)), labels = FALSE, cex.axis = 0.75, tck = 0.015)
+text(x = 0.0125, y = 5.3, "H", font = 2, cex = 1)
+
+# Plot the patchy associated data frame
+data <- list("CSR" = rand_csr[[2]], "Random Shift" = rand_rs[[2]])
 comspat_plot(data = data, params = param_grid, type = "Grid", measure = "CD",
              su_size = 0.01, ymin = 0, ymax = 5.5, xmin = 0.01, xmax = 10,
              xaxt = FALSE, yaxt = FALSE, p_col = p_col, stats_output = TRUE)
@@ -708,12 +723,13 @@ As the level of complexity decreases (i.e. the number of assembly mechanisms inv
 
 -   Lastly, both NRC and CD peak at low amplitudes (59 and 4.2, resp.) and large spatial scales (0.30--0.35 m and 0.45 m, resp.). The observed patterns deviate strongly from both CSR and RS 95% confidence intervals (at large sample unit sizes the observed pattern starts to overlap) hinting at the role of mechanisms such as filtering (plant-environment relationships) and limiting similarity (plant-plant interactions) where plant spatial associations result from resource partitioning (**Figure S15 A, D & G**).
 
-When using the `'comspat'` function with randomizations the function outputs two list objects. The first list object stores the specified Information Theory models (i.e. NRC and CD) for every secondary sampling unit for every randomization. The second list provides the summary statistics for each of the specified Information Theory models (i.e. NRC and CD) for every secondary sampling unit (**Table 2**).
+When using the `comspat()` function with randomizations the function outputs two list objects. The first list object stores the specified Information Theory models (i.e. NRC and CD) for every secondary sampling unit for every randomization. The second list provides the summary statistics for each of the specified Information Theory models (i.e. NRC and CD) for every secondary sampling unit (**Table 2**).
 
 The summary statistics can be accessed with the following code. These summary results may be helpful in interpreting specific results obtained from the randomizations.
 
-```{r, eval=TRUE}
-knitr::kable(assoc_csr$`Summary statistics`[["CD"]][,1:10],format = "html", table.attr = "style='width:100%;'")
+```{r knitr-table-null-models, eval=TRUE}
+knitr::kable(assoc_csr$`Summary statistics`[["CD"]][, 1:10], format = "html",
+             table.attr = "style='width:100%;'")
 ```
 
 **Table 2.** Summary statistic variables and descriptions exported by comspat when the randomization argument is specified.
@@ -748,9 +764,9 @@ knitr::kable(assoc_csr$`Summary statistics`[["CD"]][,1:10],format = "html", tabl
 
 ### Case Study 2: Real transect data
 
-This section analyses the real transect data sets provided by the package. It demonstrates how to use the `'comspat'` function with null models on transect data. It also demonstrates how the `'comspat_plot'` function can be used in combination with R's base plotting system to create complex graphical outputs.
+This section analyses the real transect data sets provided by the package. It demonstrates how to use the `comspat()` function with null models on transect data. It also demonstrates how the `comspat_plot()` function can be used in combination with R's base plotting system to create complex graphical outputs.
 
-```{r, eval=FALSE, echo=TRUE, fig.width = 7.1, fig.cap="**Fig. S17**. Number (number of realised combinations; NRC) and diversity (compositional diversity; CD) of species combinations in real transect data sets along increasing sample unit lengths. Transect data sets presented in the figure include: 'frequent species' (A, C) and 'Plant Functional Types' (B, D). The black line represents the observed value. The blue line and red lines represent the 95% confidence intervals generated by the complete spatial randomization and random shift null models using 999 randomizations."}
+```{r transect-analyses, eval=FALSE, echo=TRUE, fig.width = 7.1, fig.cap="**Fig. S17**. Number (number of realised combinations; NRC) and diversity (compositional diversity; CD) of species combinations in real transect data sets along increasing sample unit lengths. Transect data sets presented in the figure include: 'frequent species' (A, C) and 'Plant Functional Types' (B, D). The black line represents the observed value. The blue line and red lines represent the 95% confidence intervals generated by the complete spatial randomization and random shift null models using 999 randomizations."}
 # Case study 2: Real transect data sets
 
 # Calculate NRC and CD
@@ -773,7 +789,7 @@ t_rs <- comspat(data = tran_grass_t, params = param_tran, dim_max = 500,
 par(mfrow = c(2, 2), mar = c(0.5, 2.2, 0, 0), oma = c(7, 3, 0.5, 0.5),
     mgp = c(2, 1, 0), tcl = -0.5)
 
-p_col = list("blue","red")
+p_col <- list("blue", "red")
 
 ################################################################################
 
@@ -781,7 +797,7 @@ p_col = list("blue","red")
 
 # Plot the transect species data frame
 data <- list("CSR" = s_csr[[2]], "RS" = s_rs[[2]])
-comspat_plot(data = data, params = param_grid, type = "Transect", 
+comspat_plot(data = data, params = param_grid, type = "Transect",
              measure = "NRC", su_size = 0.01, p_col = p_col,
              ymin = 0, ymax = 200, xmin = 0.01, xmax = 10,
              xaxt = FALSE, yaxt = TRUE, stats_output = TRUE)
@@ -791,12 +807,12 @@ axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
      labels = FALSE, cex.axis = 0.75, tck = 0.015)
 axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2), labels = FALSE,
      cex.axis = 0.75, tck = 0.025)
-text(x = 0.0125, y = 197,"A", font = 2, cex = 1)
+text(x = 0.0125, y = 197, "A", font = 2, cex = 1)
 
 # Plot the transect PFT data frame
 data <- list("CSR" = t_csr[[2]], "RS" = t_rs[[2]])
 
-comspat_plot(data = data, params = param_grid, type = "Transect", 
+comspat_plot(data = data, params = param_grid, type = "Transect",
              measure = "NRC", su_size = 0.01, p_col = p_col,
              ymin = 0, ymax = 45, xmin = 0.01, xmax = 10,
              xaxt = FALSE, yaxt = TRUE, stats_output = TRUE)
@@ -805,14 +821,14 @@ axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
      labels = FALSE, cex.axis = 0.75, tck = 0.015)
 axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2), labels = FALSE,
      cex.axis = 0.75, tck = 0.025)
-text(x=0.0125,y=44,"B", font = 2, cex = 1)
+text(x = 0.0125, y = 44, "B", font = 2, cex = 1)
 
 # Part 2: the CD plots with 95% CI
 
 # Plot the transect species data frame
-data<-list("CSR"=s_csr[[2]],"Random Shift"=s_rs[[2]])
+data <- list("CSR" = s_csr[[2]], "Random Shift" = s_rs[[2]])
 
-comspat_plot(data = data, params = param_grid, type = "Transect", 
+comspat_plot(data = data, params = param_grid, type = "Transect",
              measure = "CD", su_size = 0.01, p_col = p_col,
              ymin = 0, ymax = 8, xmin = 0.01, xmax = 10,
              xaxt = TRUE, yaxt = TRUE, stats_output = TRUE)
@@ -822,13 +838,13 @@ axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
      labels = FALSE, cex.axis = 0.75, tck = -0.015)
 axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2), labels = FALSE,
      cex.axis = 0.75, tck = -0.025)
-mtext("Length of sampling units (m)", side =1, line = 4, font =2)
-text(x = 0.0125, y = 7.8,"C", font = 2, cex = 1)
+mtext("Length of sampling units (m)", side = 1, line = 4, font = 2)
+text(x = 0.0125, y = 7.8, "C", font = 2, cex = 1)
 
 # Plot the transect PFT data frame
 data <- list("CSR" = t_csr[[2]], "Random Shift" = t_rs[[2]])
 
-comspat_plot(data = data, params = param_grid, type = "Transect", 
+comspat_plot(data = data, params = param_grid, type = "Transect",
              measure = "CD", su_size = 0.01, p_col = p_col,
              ymin = 0, ymax = 5, xmin = 0.01, xmax = 10,
              xaxt = TRUE, yaxt = TRUE, stats_output = TRUE)
@@ -838,7 +854,7 @@ axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
 axis(1, at = c(0.01, 0.1, 1, 10, 100), labels = TRUE,
      cex.axis = 0.75, tck = -0.025)
 
-text(x = 0.0125, y = 5,"D", font = 2, cex = 1)
+text(x = 0.0125, y = 5, "D", font = 2, cex = 1)
 
 legend(x = 0.013, y = -1.5, legend = c("Observed", "CSR 95% CI", "RS 95% CI"),
        lty = c(1, 1, 1),
@@ -847,7 +863,7 @@ legend(x = 0.013, y = -1.5, legend = c("Observed", "CSR 95% CI", "RS 95% CI"),
        xpd = NA)
 ```
 
-```{r, eval=TRUE, echo=FALSE, fig.width = 7.1, fig.height = 7.1, fig.cap="**Fig. S17**. Number (number of realised combinations; NRC) and diversity (compositional diversity; CD) of species combinations in real transect data sets along increasing sample unit lengths. Transect data sets presented in the figure include: 'frequent species' (A, C) and 'Plant Functional Types' (B, D). The black line represents the observed value. The blue line and red lines represent the 95% confidence intervals generated by the complete spatial randomization and random shift null models using 999 randomizations."}
+```{r transect-visualization, eval=TRUE, echo=FALSE, fig.width = 7.1, fig.height = 7.1, fig.cap="**Fig. S17**. Number (number of realised combinations; NRC) and diversity (compositional diversity; CD) of species combinations in real transect data sets along increasing sample unit lengths. Transect data sets presented in the figure include: 'frequent species' (A, C) and 'Plant Functional Types' (B, D). The black line represents the observed value. The blue line and red lines represent the 95% confidence intervals generated by the complete spatial randomization and random shift null models using 999 randomizations."}
 # Case study 2: Real transect data sets
 
 #
@@ -858,13 +874,13 @@ legend(x = 0.013, y = -1.5, legend = c("Observed", "CSR 95% CI", "RS 95% CI"),
 par(mfrow = c(2, 2), mar = c(0.5, 2.2, 0, 0), oma = c(7, 3, 0.5, 0.5),
     mgp = c(2, 1, 0), tcl = -0.5)
 
-p_col = list("blue","red")
+p_col <- list("blue", "red")
 
 # Part 1: the NRC plots with 95% CI
 
 # Plot the transect species data frame
 data <- list("CSR" = s_csr[[2]], "RS" = s_rs[[2]])
-comspat_plot(data = data, params = param_grid, type = "Transect", 
+comspat_plot(data = data, params = param_grid, type = "Transect",
              measure = "NRC", su_size = 0.01, p_col = p_col,
              ymin = 0, ymax = 200, xmin = 0.01, xmax = 10,
              xaxt = FALSE, yaxt = TRUE, stats_output = TRUE)
@@ -874,12 +890,12 @@ axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
      labels = FALSE, cex.axis = 0.75, tck = 0.015)
 axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2), labels = FALSE,
      cex.axis = 0.75, tck = 0.025)
-text(x = 0.0125, y = 197,"A", font = 2, cex = 1)
+text(x = 0.0125, y = 197, "A", font = 2, cex = 1)
 
 # Plot the transect PFT data frame
 data <- list("CSR" = t_csr[[2]], "RS" = t_rs[[2]])
 
-comspat_plot(data = data, params = param_grid, type = "Transect", 
+comspat_plot(data = data, params = param_grid, type = "Transect",
              measure = "NRC", su_size = 0.01, p_col = p_col,
              ymin = 0, ymax = 45, xmin = 0.01, xmax = 10,
              xaxt = FALSE, yaxt = TRUE, stats_output = TRUE)
@@ -888,14 +904,14 @@ axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
      labels = FALSE, cex.axis = 0.75, tck = 0.015)
 axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2), labels = FALSE,
      cex.axis = 0.75, tck = 0.025)
-text(x = 0.0125, y = 44,"B", font = 2, cex = 1)
+text(x = 0.0125, y = 44, "B", font = 2, cex = 1)
 
 # Part 2: the CD plots with 95% CI
 
 # Plot the transect species data frame
-data <- list("CSR" = s_csr[[2]],"Random Shift" = s_rs[[2]])
+data <- list("CSR" = s_csr[[2]], "Random Shift" = s_rs[[2]])
 
-comspat_plot(data = data, params = param_grid, type = "Transect", 
+comspat_plot(data = data, params = param_grid, type = "Transect",
              measure = "CD", su_size = 0.01, p_col = p_col,
              ymin = 0, ymax = 8, xmin = 0.01, xmax = 10,
              xaxt = TRUE, yaxt = TRUE, stats_output = TRUE)
@@ -905,13 +921,13 @@ axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
      labels = FALSE, cex.axis = 0.75, tck = -0.015)
 axis(1, at = round(c(0.01, 0.1, 1, 10, 100), 2), labels = FALSE,
      cex.axis = 0.75, tck = -0.025)
-mtext("Length of sampling units (m)", side =1, line = 4, font =2)
-text(x = 0.0125, y = 7.8,"C", font = 2, cex = 1)
+mtext("Length of sampling units (m)", side = 1, line = 4, font = 2)
+text(x = 0.0125, y = 7.8, "C", font = 2, cex = 1)
 
 # Plot the transect PFT data frame
-data <- list("CSR"=t_csr[[2]],"Random Shift"=t_rs[[2]])
+data <- list("CSR" = t_csr[[2]], "Random Shift" = t_rs[[2]])
 
-comspat_plot(data = data, params = param_grid, type = "Transect", 
+comspat_plot(data = data, params = param_grid, type = "Transect",
              measure = "CD", su_size = 0.01, p_col = p_col,
              ymin = 0, ymax = 5, xmin = 0.01, xmax = 10,
              xaxt = TRUE, yaxt = TRUE, stats_output = TRUE)
@@ -921,51 +937,49 @@ axis(1, at = round(c(0.01, seq(0.02, 0.09, 0.01), 0.1, 1, 10, 100), 2),
 axis(1, at = c(0.01, 0.1, 1, 10, 100), labels = TRUE,
      cex.axis = 0.75, tck = -0.025)
 
-text(x = 0.0125, y = 5,"D", font = 2, cex = 1)
+text(x = 0.0125, y = 5, "D", font = 2, cex = 1)
 
 legend(x = 0.013, y = -1.5, legend = c("Observed", "CSR 95% CI", "RS 95% CI"),
        lty = c(1, 1, 1),
        col = c("black", "blue", "red"),
        ncol = 2, cex = 0.8,
        xpd = NA)
-
 ```
 
 The real transect data sets were derived from Bartha et al.'s (2008) long-term study on the effect of climate change on the interannual variability of grassland communities. The observed patterns deviate significantly from CSR expectation but they did not differ from the null distribution produced by RS. This results suggest that interspecific interactions might have limited role for shaping the spatial patterns of species in this open grasslands while abiotic factors (soil heterogeneity, weather extremes) might be more important . Here we have analyzed only a single measure in time; the manuscript (and its strength) lies strongly in its long term (9 monitoring years) repeated measure sampling design.
 
 ### References
 
-Bartha, S. and M. Kertész. 1998. The importance of neutral-models in detecting interspecific spatial associations from 'trainsect' data. *Tiscia* 31, 85--98.
+Bartha, S. and M. Kert&eacute;sz. 1998. The importance of neutral-models in detecting interspecific spatial associations from 'trainsect' data. *Tiscia* 31, 85&ndash;98.
 
-Bartha, S., Czárán, T., & Oborny, B. (1995). Spatial constraints masking community assembly rules: a simulation study. *Folia geobotanica*, 30, 471--482.
+Bartha, S., Cz&aacute;r&aacute;n, T., & Oborny, B. (1995). Spatial constraints masking community assembly rules: a simulation study. *Folia geobotanica*, 30, 471&ndash;482. \doi{10.1007/BF02803977}
 
-Bartha, S., Campetella, G., Ruprecht, E., Kun, A., Házi, J., Horváth, A., Virágh, K., & Molnár, Zs. (2008). Will\
-interannual variability in sand grassland communities increase with climate change? *Community Ecology*, 9, 13--21.
+Bartha, S., Campetella, G., Ruprecht, E., Kun, A., H&aacute;zi, J., Horv&aacute;th, A., Vir&aacute;gh, K., & Moln&aacute;r, Zs. (2008). Will interannual variability in sand grassland communities increase with climate change? *Community Ecology*, 9, 13&ndash;21. \url{https://www.jstor.org/stable/24113514}
 
-Czárán, T. 1993. PATPRO: A Monte-Carlo simulation program for multispecies neighborhood competition. *Abstracta Botanica*, 17, 275--281.
+Cz&aacute;r&aacute;n, T. 1993. PATPRO: A Monte-Carlo simulation program for multispecies neighborhood competition. *Abstracta Botanica*, 17, 275&ndash;281. \url{https://www.jstor.org/stable/43519455}
 
 Gotelli, N.J., & Graves, G.R. (1996). *Null Models in Ecology.* Smithsonian Institution Press, Washington D.C.
 
 Harms, K.E. (1997). Habitat specialization and seed dispersal limitation in a Neotropical forest. PhD thesis, Princeton University, Princeton, New Jersey, USA
 
-Juhász-Nagy, P. (1967). On association among plant populations I. *Acta Biologica Debrecina*, *5*, 43--56.
+Juh&aacute;sz-Nagy, P. (1967). On association among plant populations I. *Acta Biologica Debrecina*, *5*, 43&ndash;56.
 
-Juhász-Nagy, P. (1976). Spatial dependence of plant populations. Part 1. Equivalence analysis (an outline for a new model). *Acta Botanica Academiae Scientiarum Hungaricae*, *22*, 61--78.
+Juh&aacute;sz-Nagy, P. (1976). Spatial dependence of plant populations. Part 1. Equivalence analysis (an outline for a new model). *Acta Botanica Academiae Scientiarum Hungaricae*, *22*, 61&ndash;78.
 
-Juhász-Nagy, P. (1984a). Notes on diversity. Part I. Introduction. *Abstracta Botanica*, *8*, 43--55.
+Juh&aacute;sz-Nagy, P. (1984a). Notes on diversity. Part I. Introduction. *Abstracta Botanica*, *8*, 43&ndash;55.
 
-Juhász-Nagy, P. (1984b). Spatial dependence of plant populations. Part 2. A family of new models. *Acta Botanica Hungarica*, *30*, 363--402.
+Juh&aacute;sz-Nagy, P. (1984b). Spatial dependence of plant populations. Part 2. A family of new models. *Acta Botanica Hungarica*, *30*, 363&ndash;402.
 
-Juhász-Nagy, P. (1993). Notes on compositional diversity. *Hydrobiologia*, *249*, 173--182.
+Juh&aacute;sz-Nagy, P. (1993). Notes on compositional diversity. *Hydrobiologia*, *249*, 173--182.
 
-Juhász-Nagy, P., & Podani, J. (1983). Information theory methods for the study of spatial processes and succession. *Vegetatio*, *51*, 129--140.
+Juh&aacute;sz-Nagy, P., & Podani, J. (1983). Information theory methods for the study of spatial processes and succession. *Vegetatio*, *51*, 129&ndash;140.
 
-Podani, J. (1984). Analysis of mapped and simulated vegetation patterns by means of computerized sampling techniques *Acta Botanica Hungarica*, 30, 403--425.
+Podani, J. (1984). Analysis of mapped and simulated vegetation patterns by means of computerized sampling techniques *Acta Botanica Hungarica*, 30, 403&ndash;425.
 
-Podani, J., Czárán, T., & Bartha, S (1993). Pattern, area and diversity: the importance of spatial scale in species assemblages. *Abstracta Botanica*, 17, 37--51.
+Podani, J., Cz&aacute;r&aacute;n, T., & Bartha, S (1993). Pattern, area and diversity: the importance of spatial scale in species assemblages. *Abstracta Botanica*, 17, 37&ndash;51. \url{https://www.jstor.org/stable/43519429}
 
-Rejmánek, M., & Lepš, J. (1966). Negative associations can reveal interspecific competition and reversal of competitive hierarchies during succession. *Oikos*, 76, 161--168.
+Rejm&aacute;nek, M., & Lep&scaron;, J. (1966). Negative associations can reveal interspecific competition and reversal of competitive hierarchies during succession. *Oikos*, 76, 161&ndash;168. \doi{10.2307/3545758}
 
-Tsakalos, J.L., Chelli, S., Campetella, G., Canullo, R., Simonetti, E., Bartha, S. (2022). comspat: An R package to analyze within community spatial association.
+Tsakalos, J.L., Chelli, S., Campetella, G., Canullo, R., Simonetti, E., Bartha, S. (2022). comspat: An R package to analyze within community spatial association. \doi{10.1111/ecog.06216}
 
-Wensel, L. C. (1975). The treatment of boundary-line overlap in a forest sampling simulator. *Hilgardia*, 43, 143--159.
+Wensel, L. C. (1975). The treatment of boundary-line overlap in a forest sampling simulator. *Hilgardia*, 43, 143&ndash;159. \doi{10.3733/hilg.v43n05p143}

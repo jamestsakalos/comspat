@@ -39,17 +39,17 @@ freq_comb <- function(data, type, dim_max) {
 
     temp <- data[data$X == i, ]
 
-    if (type == "Grid" & nrow(temp) > 0) {
+    if (type == "Grid" && nrow(temp) > 0) {
       temp <- data.frame(
         "combinations" =
           aggregate(temp$Species[order(temp$Species)] ~ ., temp, toString)[3],
         "Plot" = i)
     }
 
-    if (type == "Transect" & nrow(temp) > 0) {
+    if (type == "Transect" && nrow(temp) > 0) {
       temp <- data.frame(
         "combinations" =
-          aggregate(temp$Species[order(temp$Species)] ~., temp, toString)[2],
+          aggregate(temp$Species[order(temp$Species)] ~ ., temp, toString)[2],
         "Plot" = i)
     }
 
