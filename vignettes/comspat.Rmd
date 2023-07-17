@@ -940,37 +940,36 @@ The real transect data sets were derived from Bartha et al.'s (2008) long-term s
 
 ### References
 
-Bartha, S. and M. Kertész. 1998. The importance of neutral-models in detecting interspecific spatial associations from 'trainsect' data. *Tiscia* 31, 85--98.
+Bartha, S. and M. Kert&eacute;sz. 1998. The importance of neutral-models in detecting interspecific spatial associations from 'trainsect' data. *Tiscia* 31, 85&ndash;98.
 
-Bartha, S., Czárán, T., & Oborny, B. (1995). Spatial constraints masking community assembly rules: a simulation study. *Folia geobotanica*, 30, 471--482.
+Bartha, S., Cz&aacute;r&aacute;n, T., & Oborny, B. (1995). Spatial constraints masking community assembly rules: a simulation study. *Folia geobotanica*, 30, 471&ndash;482.
 
-Bartha, S., Campetella, G., Ruprecht, E., Kun, A., Házi, J., Horváth, A., Virágh, K., & Molnár, Zs. (2008). Will\
-interannual variability in sand grassland communities increase with climate change? *Community Ecology*, 9, 13--21.
+Bartha, S., Campetella, G., Ruprecht, E., Kun, A., H&aacute;zi, J., Horv&aacute;th, A., Vir&aacute;gh, K., & Moln&aacute;r, Zs. (2008). Will interannual variability in sand grassland communities increase with climate change? *Community Ecology*, 9, 13&ndash;21.
 
-Czárán, T. 1993. PATPRO: A Monte-Carlo simulation program for multispecies neighborhood competition. *Abstracta Botanica*, 17, 275--281.
+Cz&aacute;r&aacute;n, T. 1993. PATPRO: A Monte-Carlo simulation program for multispecies neighborhood competition. *Abstracta Botanica*, 17, 275&ndash;281.
 
 Gotelli, N.J., & Graves, G.R. (1996). *Null Models in Ecology.* Smithsonian Institution Press, Washington D.C.
 
 Harms, K.E. (1997). Habitat specialization and seed dispersal limitation in a Neotropical forest. PhD thesis, Princeton University, Princeton, New Jersey, USA
 
-Juhász-Nagy, P. (1967). On association among plant populations I. *Acta Biologica Debrecina*, *5*, 43--56.
+Juh&aacute;sz-Nagy, P. (1967). On association among plant populations I. *Acta Biologica Debrecina*, *5*, 43&ndash;56.
 
-Juhász-Nagy, P. (1976). Spatial dependence of plant populations. Part 1. Equivalence analysis (an outline for a new model). *Acta Botanica Academiae Scientiarum Hungaricae*, *22*, 61--78.
+Juh&aacute;sz-Nagy, P. (1976). Spatial dependence of plant populations. Part 1. Equivalence analysis (an outline for a new model). *Acta Botanica Academiae Scientiarum Hungaricae*, *22*, 61&ndash;78.
 
-Juhász-Nagy, P. (1984a). Notes on diversity. Part I. Introduction. *Abstracta Botanica*, *8*, 43--55.
+Juh&aacute;sz-Nagy, P. (1984a). Notes on diversity. Part I. Introduction. *Abstracta Botanica*, *8*, 43&ndash;55.
 
-Juhász-Nagy, P. (1984b). Spatial dependence of plant populations. Part 2. A family of new models. *Acta Botanica Hungarica*, *30*, 363--402.
+Juh&aacute;sz-Nagy, P. (1984b). Spatial dependence of plant populations. Part 2. A family of new models. *Acta Botanica Hungarica*, *30*, 363&ndash;402.
 
-Juhász-Nagy, P. (1993). Notes on compositional diversity. *Hydrobiologia*, *249*, 173--182.
+Juh&aacute;sz-Nagy, P. (1993). Notes on compositional diversity. *Hydrobiologia*, *249*, 173--182.
 
-Juhász-Nagy, P., & Podani, J. (1983). Information theory methods for the study of spatial processes and succession. *Vegetatio*, *51*, 129--140.
+Juh&aacute;sz-Nagy, P., & Podani, J. (1983). Information theory methods for the study of spatial processes and succession. *Vegetatio*, *51*, 129&ndash;140.
 
-Podani, J. (1984). Analysis of mapped and simulated vegetation patterns by means of computerized sampling techniques *Acta Botanica Hungarica*, 30, 403--425.
+Podani, J. (1984). Analysis of mapped and simulated vegetation patterns by means of computerized sampling techniques *Acta Botanica Hungarica*, 30, 403&ndash;425.
 
-Podani, J., Czárán, T., & Bartha, S (1993). Pattern, area and diversity: the importance of spatial scale in species assemblages. *Abstracta Botanica*, 17, 37--51.
+Podani, J., Cz&aacute;r&aacute;n, T., & Bartha, S (1993). Pattern, area and diversity: the importance of spatial scale in species assemblages. *Abstracta Botanica*, 17, 37&ndash;51.
 
-Rejmánek, M., & Lepš, J. (1966). Negative associations can reveal interspecific competition and reversal of competitive hierarchies during succession. *Oikos*, 76, 161--168.
+Rejm&aacute;nek, M., & Lep&scaron;, J. (1966). Negative associations can reveal interspecific competition and reversal of competitive hierarchies during succession. *Oikos*, 76, 161&ndash;168.
 
 Tsakalos, J.L., Chelli, S., Campetella, G., Canullo, R., Simonetti, E., Bartha, S. (2022). comspat: An R package to analyze within community spatial association.
 
-Wensel, L. C. (1975). The treatment of boundary-line overlap in a forest sampling simulator. *Hilgardia*, 43, 143--159.
+Wensel, L. C. (1975). The treatment of boundary-line overlap in a forest sampling simulator. *Hilgardia*, 43, 143&ndash;159. \doi{10.3733/hilg.v43n05p143}
