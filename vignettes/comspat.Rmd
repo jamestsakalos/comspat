@@ -1,12 +1,12 @@
 ---
-title: "Guidelines for the *comspat* package"
+title: "Getting started with 'comspat'"
 author: "James Tsakalos (james.tsakalos@gmail.com), Stefano Chelli, Giandiego Campetella, Roberto Canullo, Enrico Simonetti, Sandor Bartha"
 date: "04.03.2022"
 output:
   rmarkdown::html_vignette:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{comspat}
+  %\VignetteIndexEntry{Getting started with 'comspat'}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,6 +15,16 @@ vignette: >
 <style>
 body {
 text-align: justify}
+</style>
+<style>
+p.caption {
+  font-size: 0.9em;
+  font-style: normal;
+  color: grey;
+  margin-right: 10%;
+  margin-left: 10%;  
+  text-align: justify;
+}
 </style>
 ```
 
@@ -155,7 +165,7 @@ mtext("Species frequency", side = 2, line = 3.5, cex = 0.8, font = 2)
 box(which = "plot", lwd = 2)
 ```
 
-Now that we have demonstrated that the grid data sets all feature the same species abundance distributions we might also like to look at how the distributions of species combinations vary between the grids. To achieve this goal we have defined a helper function. Please see the `'freq_comb'` function and documentation.
+Now that we have demonstrated that the grid data sets all feature the same species abundance distributions we might also like to look at how the distributions of species combinations vary between the grids. To achieve this goal we have defined a helper function. Please see the `freq_comb()` function and documentation.
 
 ```{r view-frequency-combinations, fig.width = 7.1, fig.cap="**Fig. S4**. Barplot demonstrating the differences of the frequency distribution of species combinations among the contrasting types of patterns represented by the grid data sets. Each bar represents a specific species combination occurring within the smallest sample unit size."}
 # Plot the distribution of species combinations
@@ -266,7 +276,7 @@ box(which = "plot", lwd = 2)
 
 ### Step 2. Preparing the parameter data set
 
-The `'comspat'` function performs computerized sampling (called secondary sampling) from the primary (grid or transect) data. During secondary sampling users can change the sampling grain (by merging adjacent sampling units into larger ones. To control the secondary sampling procedure, the user must specify several sampling parameters. The secondary sampling parameters are supplied to the params argument as a data frame. The parameter data frame stores the secondary sampling parameters as a series of steps stored as rows. The parameter data frame also contains columns which specify the length and height of the secondary sampling units. The units supplied to the length and height columns must correspond to the number of primary sampling units in each dimension. The height dimension is not required where sampling was conducted as a transect. We have used Wensel's (1975) method within our package, where incomplete sampling units are complemented by fragments taken from the opposite edge of the mapped grid. While we highly recommend following the guideline sequentially if you would like to visualize this secondary sampling routine please inspect our gif animations embedded as **Fig. S10**. Please note that these will appear as static images in pdf format.
+The `comspat()` function performs computerized sampling (called secondary sampling) from the primary (grid or transect) data. During secondary sampling users can change the sampling grain (by merging adjacent sampling units into larger ones. To control the secondary sampling procedure, the user must specify several sampling parameters. The secondary sampling parameters are supplied to the params argument as a data frame. The parameter data frame stores the secondary sampling parameters as a series of steps stored as rows. The parameter data frame also contains columns which specify the length and height of the secondary sampling units. The units supplied to the length and height columns must correspond to the number of primary sampling units in each dimension. The height dimension is not required where sampling was conducted as a transect. We have used Wensel's (1975) method within our package, where incomplete sampling units are complemented by fragments taken from the opposite edge of the mapped grid. While we highly recommend following the guideline sequentially if you would like to visualize this secondary sampling routine please inspect our gif animations embedded as **Fig. S10**. Please note that these will appear as static images in pdf format.
 
 We recommended that the size of the secondary sampling units follow a logarithmic spatial scale during the first approximation of the functions (**Fig. S8**). In this manner, exponential enlargement of the secondary sampling units is achieved. The largest secondary sampling unit should be less than a quarter of the total sampling area to reduce the edge effect. The ultimate selection of secondary sampling units should consider the distribution of maxima functions. After having the first results, the estimates can be improved by modifying of the secondary sampling (using more or different sampling unit sizes).
 
@@ -309,7 +319,7 @@ While a picture paints a thousand words, perhaps an animation of the secondary s
 
 ### Step 5. comspat without null models.
 
-The `'comspat'` function allows users to calculate Information Theory models with and without null models. Analysis without the use of null models is a useful feature during the data exploration phase. It is useful because it allows users to optimize their parameter data set and to visually assess the data without the requirement of parallel computing (initiated when null models are generated) and waiting for potentially time-intensive calculations to complete. Here we demonstrate how the `'comspat_plot'` function can be used to prepare a graphical output. Because the plotting function was created using R's base plotting code it is compatible with several common plotting functions (including `'par'`).
+The `comspat()` function allows users to calculate Information Theory models with and without null models. Analysis without the use of null models is a useful feature during the data exploration phase. It is useful because it allows users to optimize their parameter data set and to visually assess the data without the requirement of parallel computing (initiated when null models are generated) and waiting for potentially time-intensive calculations to complete. Here we demonstrate how the `comspat_plot()` function can be used to prepare a graphical output. Because the plotting function was created using R's base plotting code it is compatible with several common plotting functions (including `par()`).
 
 ```{r load-ms-data, echo  =FALSE}
 load("ms_results.rdata")
@@ -391,7 +401,7 @@ Here is a diagram of several shifts on a 4 ⨯ 4 grid. The position (1,1) repres
 
 ### Case Study 1: Simulated grid data
 
-This section reproduces the analyses of the grid data sets presented in Figure 1 (Tsakalos et al. 2022). It demonstrates how to use the `'comspat'` function with null models on grid data. It also demonstrates how the `'comspat_plot'` function can be used in combination with R's base plotting system to create complex graphical outputs.
+This section reproduces the analyses of the grid data sets presented in Figure 1 (Tsakalos et al. 2022). It demonstrates how to use the `comspat()` function with null models on grid data. It also demonstrates how the `comspat_plot()` function can be used in combination with R's base plotting system to create complex graphical outputs.
 
 ```{r plot-randomizations, eval=FALSE, echo=TRUE, fig.width = 7.1, fig.cap="**Fig. S16**. Mapped patterns, number (number of realised combinations; NRC) and diversity (compositional diversity; CD) of species combinations in simulated grid data sets along increasing sample unit lengths. Grid data sets presented in the figure include: ‘random' (A, D, G), 'random patchy' (B, E, H) and 'patchy associated' (C, F, I). The black line represents the observed value. The blue line and red lines represent the 95% confidence intervals generated by the complete spatial randomization and random shift null models using 999 randomizations."}
 # Case study 1: Simulated grid data sets
@@ -713,7 +723,7 @@ As the level of complexity decreases (i.e. the number of assembly mechanisms inv
 
 -   Lastly, both NRC and CD peak at low amplitudes (59 and 4.2, resp.) and large spatial scales (0.30--0.35 m and 0.45 m, resp.). The observed patterns deviate strongly from both CSR and RS 95% confidence intervals (at large sample unit sizes the observed pattern starts to overlap) hinting at the role of mechanisms such as filtering (plant-environment relationships) and limiting similarity (plant-plant interactions) where plant spatial associations result from resource partitioning (**Figure S15 A, D & G**).
 
-When using the `'comspat'` function with randomizations the function outputs two list objects. The first list object stores the specified Information Theory models (i.e. NRC and CD) for every secondary sampling unit for every randomization. The second list provides the summary statistics for each of the specified Information Theory models (i.e. NRC and CD) for every secondary sampling unit (**Table 2**).
+When using the `comspat()` function with randomizations the function outputs two list objects. The first list object stores the specified Information Theory models (i.e. NRC and CD) for every secondary sampling unit for every randomization. The second list provides the summary statistics for each of the specified Information Theory models (i.e. NRC and CD) for every secondary sampling unit (**Table 2**).
 
 The summary statistics can be accessed with the following code. These summary results may be helpful in interpreting specific results obtained from the randomizations.
 
@@ -754,7 +764,7 @@ knitr::kable(assoc_csr$`Summary statistics`[["CD"]][, 1:10], format = "html",
 
 ### Case Study 2: Real transect data
 
-This section analyses the real transect data sets provided by the package. It demonstrates how to use the `'comspat'` function with null models on transect data. It also demonstrates how the `'comspat_plot'` function can be used in combination with R's base plotting system to create complex graphical outputs.
+This section analyses the real transect data sets provided by the package. It demonstrates how to use the `comspat()` function with null models on transect data. It also demonstrates how the `comspat_plot()` function can be used in combination with R's base plotting system to create complex graphical outputs.
 
 ```{r transect-analyses, eval=FALSE, echo=TRUE, fig.width = 7.1, fig.cap="**Fig. S17**. Number (number of realised combinations; NRC) and diversity (compositional diversity; CD) of species combinations in real transect data sets along increasing sample unit lengths. Transect data sets presented in the figure include: 'frequent species' (A, C) and 'Plant Functional Types' (B, D). The black line represents the observed value. The blue line and red lines represent the 95% confidence intervals generated by the complete spatial randomization and random shift null models using 999 randomizations."}
 # Case study 2: Real transect data sets
