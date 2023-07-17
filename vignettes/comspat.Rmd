@@ -942,11 +942,11 @@ The real transect data sets were derived from Bartha et al.'s (2008) long-term s
 
 Bartha, S. and M. Kert&eacute;sz. 1998. The importance of neutral-models in detecting interspecific spatial associations from 'trainsect' data. *Tiscia* 31, 85&ndash;98.
 
-Bartha, S., Cz&aacute;r&aacute;n, T., & Oborny, B. (1995). Spatial constraints masking community assembly rules: a simulation study. *Folia geobotanica*, 30, 471&ndash;482.
+Bartha, S., Cz&aacute;r&aacute;n, T., & Oborny, B. (1995). Spatial constraints masking community assembly rules: a simulation study. *Folia geobotanica*, 30, 471&ndash;482. \doi{10.1007/BF02803977}
 
-Bartha, S., Campetella, G., Ruprecht, E., Kun, A., H&aacute;zi, J., Horv&aacute;th, A., Vir&aacute;gh, K., & Moln&aacute;r, Zs. (2008). Will interannual variability in sand grassland communities increase with climate change? *Community Ecology*, 9, 13&ndash;21.
+Bartha, S., Campetella, G., Ruprecht, E., Kun, A., H&aacute;zi, J., Horv&aacute;th, A., Vir&aacute;gh, K., & Moln&aacute;r, Zs. (2008). Will interannual variability in sand grassland communities increase with climate change? *Community Ecology*, 9, 13&ndash;21. \url{https://www.jstor.org/stable/24113514}
 
-Cz&aacute;r&aacute;n, T. 1993. PATPRO: A Monte-Carlo simulation program for multispecies neighborhood competition. *Abstracta Botanica*, 17, 275&ndash;281.
+Cz&aacute;r&aacute;n, T. 1993. PATPRO: A Monte-Carlo simulation program for multispecies neighborhood competition. *Abstracta Botanica*, 17, 275&ndash;281. \url{https://www.jstor.org/stable/43519455}
 
 Gotelli, N.J., & Graves, G.R. (1996). *Null Models in Ecology.* Smithsonian Institution Press, Washington D.C.
 
@@ -966,10 +966,10 @@ Juh&aacute;sz-Nagy, P., & Podani, J. (1983). Information theory methods for the 
 
 Podani, J. (1984). Analysis of mapped and simulated vegetation patterns by means of computerized sampling techniques *Acta Botanica Hungarica*, 30, 403&ndash;425.
 
-Podani, J., Cz&aacute;r&aacute;n, T., & Bartha, S (1993). Pattern, area and diversity: the importance of spatial scale in species assemblages. *Abstracta Botanica*, 17, 37&ndash;51.
+Podani, J., Cz&aacute;r&aacute;n, T., & Bartha, S (1993). Pattern, area and diversity: the importance of spatial scale in species assemblages. *Abstracta Botanica*, 17, 37&ndash;51. \url{https://www.jstor.org/stable/43519429}
 
-Rejm&aacute;nek, M., & Lep&scaron;, J. (1966). Negative associations can reveal interspecific competition and reversal of competitive hierarchies during succession. *Oikos*, 76, 161&ndash;168.
+Rejm&aacute;nek, M., & Lep&scaron;, J. (1966). Negative associations can reveal interspecific competition and reversal of competitive hierarchies during succession. *Oikos*, 76, 161&ndash;168. \doi{10.2307/3545758}
 
-Tsakalos, J.L., Chelli, S., Campetella, G., Canullo, R., Simonetti, E., Bartha, S. (2022). comspat: An R package to analyze within community spatial association.
+Tsakalos, J.L., Chelli, S., Campetella, G., Canullo, R., Simonetti, E., Bartha, S. (2022). comspat: An R package to analyze within community spatial association. \doi{10.1111/ecog.06216}
 
 Wensel, L. C. (1975). The treatment of boundary-line overlap in a forest sampling simulator. *Hilgardia*, 43, 143&ndash;159. \doi{10.3733/hilg.v43n05p143}
